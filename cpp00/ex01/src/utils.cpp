@@ -1,9 +1,10 @@
-#include "phonebook.h"
+#include "../include/phonebook.h"
 
 void	printAndGetline(std::string to_print, std::string &input)
 {
 	std::cout << to_print;
-	std::getline(std::cin, input);
+	if (!std::getline(std::cin, input))
+		quick_exit(0);
 }
 
 int	convertInputToIndex(int index_max)

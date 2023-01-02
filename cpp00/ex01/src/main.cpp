@@ -1,4 +1,4 @@
-#include "phonebook.h"
+#include "../include/phonebook.h"
 
 int	main()
 {

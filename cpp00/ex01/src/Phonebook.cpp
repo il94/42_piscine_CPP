@@ -1,4 +1,4 @@
-#include "phonebook.h"
+#include "../include/phonebook.h"
 
 Phonebook::Phonebook() : m_number_of_contacts(0)
 {
@@ -33,9 +33,9 @@ void	Phonebook::displayPhonebook()
 	for (int i(0); i < m_number_of_contacts; i++)
 	{
 		std::cout << "\t\t ║" << "         " << i + 1 << "|";
-		std::cout << displayInPhonebook(m_contacts[i].m_firstName) << "|";
-		std::cout << displayInPhonebook(m_contacts[i].m_lastName) << "|";
-		std::cout << displayInPhonebook(m_contacts[i].m_nickName) << "║\n";
+		std::cout << std::setw(10) << displayStrInPhonebook(m_contacts[i].getFirstName()) << "|";
+		std::cout << std::setw(10) << displayStrInPhonebook(m_contacts[i].getLastName()) << "|";
+		std::cout << std::setw(10) << displayStrInPhonebook(m_contacts[i].getNickName()) << "║\n";
 	}
 	std::cout << "\t\t ╚══════════╧══════════╧══════════╧══════════╝\n";
 }
@@ -53,22 +53,12 @@ void	Phonebook::searchContact()
 	}
 }
 
-std::string	Phonebook::displayInPhonebook(std::string str)
+std::string	Phonebook::displayStrInPhonebook(std::string str)
 {
 	std::string	result;
-	int		size_spaces = 10 - str.size();
 
+	result = str.substr(0, 10);
 	if (str.size() > 10)
-	{
-		result = str;
 		result[9] = '.';
-		result = result.substr(0, 10);
-	}
-	else
-	{
-		for (int i(0); i < size_spaces; i++)
-			result += ' ';
-		result += str;
-	}
 	return (result);
 }

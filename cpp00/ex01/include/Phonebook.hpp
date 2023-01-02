@@ -8,12 +8,13 @@ class	Phonebook
 	public :
 
 	Phonebook();
+
 	void		addContact();
 	void		searchContact();
 
 	private :
 
-	std::string	displayInPhonebook(std::string str);
+	std::string	displayStrInPhonebook(std::string str);
 	void		displayPhonebook();
 
 	Contact		m_contacts[8];

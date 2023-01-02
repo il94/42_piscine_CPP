@@ -28,9 +28,9 @@ END = \033[0m
 #                                    PATHS                                     #
 #==============================================================================#
 
-SRC_DIR = src
-HEADER_DIR = include
-OBJ_DIR = obj
+SRC_DIR = src/
+HEADER_DIR = include/
+OBJ_DIR = obj/
 
 #==============================================================================#
 #                                   SOURCES                                    #
@@ -42,13 +42,13 @@ SRC = main.cpp utils.cpp Phonebook.cpp Contact.cpp \
 #                                   HEADERS                                    #
 #==============================================================================#
 
-HEAD_NAME = $(HEADER_DIR)/phonebook.h
+HEAD = $(addprefix $(HEADER_DIR), phonebook.h Phonebook.hpp Contact.hpp) \
 
 #==============================================================================#
 #                                   OBJECTS                                    #
 #==============================================================================#
 
-OBJ = $(SRC:%.c=$(OBJ_DIR)/%.o)
+OBJ = $(addprefix $(OBJ_DIR), $(SRC:.cpp=.o))
 
 #==============================================================================#
 #                                   MAKEFILE                                   #
@@ -58,10 +58,10 @@ all : $(OBJ_DIR) $(NAME)
 
 $(NAME) : $(OBJ)
 	echo "$(YELLOW)Making CPP Exercise$(END)"
-	$(CC) $(CFLAGS) $(OBJ) -o $(NAME)
+	$(CC) $(OBJ) -o $(NAME)
 	echo "$(GREEN)Done$(END)"
 
-$(OBJ_DIR)/%.o : $(SRC_DIR)/%.c $(HEAD_NAME) Makefile
+$(OBJ_DIR)%.o : $(SRC_DIR)%.cpp $(HEAD) Makefile
 	$(CC) $(CFLAGS) $(DFLAGS) -c $< -o $@
 
 $(OBJ_DIR) :

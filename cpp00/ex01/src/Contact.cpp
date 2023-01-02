@@ -1,4 +1,4 @@
-#include "phonebook.h"
+#include "../include/phonebook.h"
 
 void	Contact::createNewContact()
 {
@@ -24,3 +24,18 @@ void	Contact::displayContact()
 	std::cout << "His Darkest Secret : " << m_darkestSecret << std::endl;
 }
 
+
+std::string	Contact::getFirstName()
+{
+	return (m_firstName);
+}
+
+std::string	Contact::getLastName()
+{
+	return (m_lastName);
+}
+
+std::string	Contact::getNickName()
+{
+	return (m_nickName);
+}
