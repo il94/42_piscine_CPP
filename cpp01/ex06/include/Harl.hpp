@@ -7,7 +7,6 @@ class Harl
 {
 	public :
 	
-	Harl();
 	void	complain( std::string level );
 
 	private :
@@ -16,8 +15,6 @@ class Harl
 	void	info( void );
 	void	warning( void );
 	void	error( void );
-
-	void	(Harl::*_array[8])();
 };
 
 #endif
