@@ -4,7 +4,7 @@ int	main(int ac, char **av)
 {
 	if (ac != 2)
 	{
-		std::cout << "What are these entries ? It's all nonsense !\n";
+		std::cout << "What are these entries ? It's all nonsense !" << std::endl;
 		return (1);
 	}
 	Harl	harl;
