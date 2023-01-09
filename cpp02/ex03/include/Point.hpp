@@ -21,8 +21,6 @@ class Point
 
 	const Fixed	_x;
 	const Fixed	_y;
-	int			_order;
-	bool		_isPositive;
 };
 
 #endif

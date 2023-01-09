@@ -1,9 +1,9 @@
 #include "../include/Zombie.hpp"
 
-Zombie*	 newZombie( std::string name );
-void	 randomChump( std::string name );
+Zombie*	 newZombie(std::string name);
+void	 randomChump(std::string name);
 
-int main(void)
+int main( void )
 {
 	Zombie *zombie = newZombie("Moussa le brancardier");
 

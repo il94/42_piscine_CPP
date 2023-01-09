@@ -17,8 +17,8 @@ class	Phonebook
 	std::string	displayStrInPhonebook(std::string str);
 	void		displayPhonebook();
 
-	Contact		m_contacts[8];
-	int			m_number_of_contacts;
+	Contact		_contacts[8];
+	int			_number_of_contacts;
 };
 
 #endif
