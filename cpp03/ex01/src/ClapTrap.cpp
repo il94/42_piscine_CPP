@@ -14,7 +14,7 @@ ClapTrap::~ClapTrap(){
 }
 
 ClapTrap&	ClapTrap::operator=(const ClapTrap& src){
-	_name = src._name;
+	_name = src._name + "Copy";
 	_hitPoints = src._hitPoints;
 	_energyPoints = src._energyPoints;
 	_attackDamage = src._attackDamage;

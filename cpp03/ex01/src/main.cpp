@@ -13,7 +13,7 @@ int	main( void )
 	goku.attack("God Usopp");
 	goku.attack("God Usopp");
 	goku.attack("God Usopp");
-	std::cout << "This damage is insignificant for God Usopp..." << std::endl;
+	std::cout << "This damages is insignificant for God Usopp..." << std::endl;
 	std::cout << std::endl;
 
 	goku.takeDamage(99);

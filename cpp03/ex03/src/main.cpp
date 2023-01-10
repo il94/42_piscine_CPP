@@ -52,12 +52,13 @@ int	main( void )
 	goku.whoAmI();
 	std::cout << std::endl;
 
+	std::cout << "God Ussop say :" << std::endl << "I have to go home, so..." << std::endl;
 	goku.takeDamage(99999999);
 	vegeta.takeDamage(99999999);
 	gohan.takeDamage(99999999);
 	goku.beRepaired(1);
 	vegeta.attack("God Usopp");
-	gohan.beRepaired(1);
+	gohan.highFivesGuys();
 	std::cout << "God Usopp has destroyed everyone..." << std::endl;
 	std::cout << std::endl;
 

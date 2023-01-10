@@ -25,7 +25,7 @@ int	main( void )
 	goku.attack("God Usopp");
 	std::cout << std::endl;
 	
-	goku.takeDamage(9999);
+	goku.takeDamage(999);
 	goku.beRepaired(1);
 	goku.attack("God Usopp");
 	std::cout << "God Usopp has destroyed Goku..." << std::endl;

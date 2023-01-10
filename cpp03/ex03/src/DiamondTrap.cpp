@@ -31,7 +31,7 @@ void	DiamondTrap::whoAmI( void )
 	else
 	{
 		std::cout << "\033[1;36mDiamondTrap\033[0m " << _name << " say : " << std::endl;
-		std::cout << "I am... YOUR FATHER !! No it's a joke, my name is " << _name << std::endl;
+		std::cout << "I am... YOUR FATHER !! No it's a joke, I am " << _name << std::endl;
 		std::cout << "But my real name is DIO BRANDO ZEHAHAHA !! No lol, it's " << ClapTrap::_name << std::endl;
 	}
 }

@@ -18,7 +18,7 @@ int	main( void )
 	goku.attack("God Usopp");
 	goku.attack("God Usopp");
 	goku.attack("God Usopp");
-	std::cout << "God Usopp holds back his laughter..." << std::endl;
+	std::cout << "God Usopp takes the blows hoping to feel something..." << std::endl;
 	std::cout << std::endl;
 
 	goku.takeDamage(99);
@@ -46,8 +46,8 @@ int	main( void )
 	goku.takeDamage(99999);
 	vegeta.takeDamage(99999);
 	goku.beRepaired(1);
-	vegeta.beRepaired(1);
-	std::cout << "God Usopp has destroyed Goku and Vegeta..." << std::endl;
+	vegeta.attack("God Usopp");
+	std::cout << "God Usopp has pulverized Goku and Vegeta..." << std::endl;
 	std::cout << std::endl;
 
 	{

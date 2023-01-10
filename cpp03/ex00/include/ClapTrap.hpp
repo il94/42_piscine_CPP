@@ -19,7 +19,7 @@ class ClapTrap
 	void	beRepaired(unsigned int amount);
 	void	printAttributes( void );
 
-	protected:
+	private:
 
 	ClapTrap();
 
