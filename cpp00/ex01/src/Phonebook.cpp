@@ -49,7 +49,8 @@ void	Phonebook::searchContact()
 	{
 		std::cout << "\t\t\t[      Display contact      ]\n";
 		index = convertInputToIndex(_number_of_contacts);
-		_contacts[index].displayContact();
+		if (index >= 0)
+			_contacts[index].displayContact();
 	}
 }
 

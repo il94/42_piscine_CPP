@@ -12,7 +12,7 @@ void	Contact::createNewContact()
 	while (_phoneNumber.size() == 0)
 		printAndGetline("\t Phone Number : ", _phoneNumber);
 	while (_darkestSecret.size() == 0)
-		printAndGetline("His Darkest Secret ? : ", _darkestSecret);
+		printAndGetline(" His Darkest Secret ? : ", _darkestSecret);
 }
 
 void	Contact::displayContact()
@@ -21,7 +21,7 @@ void	Contact::displayContact()
 	std::cout << "\t    Last Name : " << _lastName << std::endl;
 	std::cout << "\t    Nick Name : " << _nickName << std::endl;
 	std::cout << "\t Phone Number : " << _phoneNumber << std::endl;
-	std::cout << "His Darkest Secret : " << _darkestSecret << std::endl;
+	std::cout << "   His Darkest Secret : " << _darkestSecret << std::endl;
 }
 
 
