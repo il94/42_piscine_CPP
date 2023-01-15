@@ -5,12 +5,17 @@ std::string getFileContent(std::ifstream &toRead)
 	std::string	fileContent;
 	std::string buffer;
 
-	while (getline(toRead, buffer))
-		fileContent += buffer += "\n";
+	while (std::getline(toRead, buffer))
+	{
+		std::cout << "[" << buffer << "]" << std::endl;
+		fileContent += buffer;
+		if (not toRead.eof())
+			fileContent += "\n";
+	}
 	return (fileContent);
 }
 
-const char	*generateOutputName(std::string baseName)
+const char	*generateOutputName(std::string &baseName)
 {
 	baseName.append(".replace");
 	return (baseName.c_str());

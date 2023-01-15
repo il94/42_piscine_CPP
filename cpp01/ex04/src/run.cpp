@@ -17,9 +17,9 @@ static std::string	replace(std::string file, std::string s1, std::string s2)
 	return (result);
 }
 
-void	run(char *inputFile, std::string s1, std::string s2)
+void	run(std::string inputFile, std::string s1, std::string s2)
 {
-	std::ifstream	input(inputFile);
+	std::ifstream	input(inputFile.c_str());
 	if (!input.good())
 	{
 		std::cout << "Invalid input file\n";

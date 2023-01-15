@@ -8,8 +8,8 @@ NAME = BRAIN
 #                                   COMMANDS                                   #
 #==============================================================================#
 
-CC = c++
-CFLAGS = -Wall -Wextra -Werror -std=c++98
+CXX = c++
+CXXFLAGS = -Wall -Wextra -Werror -std=c++98
 DFLAGS = -MMD
 MKDIR = mkdir -p
 RM = rm -f
@@ -52,11 +52,11 @@ all : $(OBJ_DIR) $(NAME)
 
 $(NAME) : $(OBJ)
 	echo "$(YELLOW)Making CPP Exercise$(END)"
-	$(CC) $(OBJ) -o $(NAME)
+	$(CXX) $(OBJ) -o $(NAME)
 	echo "$(GREEN)Done$(END)"
 
 $(OBJ_DIR)%.o : $(SRC_DIR)%.cpp Makefile
-	$(CC) $(CFLAGS) $(DFLAGS) -c $< -o $@
+	$(CXX) $(CXXFLAGS) $(DFLAGS) -c $< -o $@
 
 $(OBJ_DIR) :
 	$(MKDIR) $(OBJ_DIR)

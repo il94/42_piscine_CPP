@@ -2,8 +2,14 @@
 
 Zombie* newZombie(std::string name)
 {
-	Zombie *zombie = new Zombie;
-
-	zombie->setName(name);
-	return (zombie);
+	try
+	{
+		Zombie *zombie = new Zombie(name);
+		return (zombie);
+	}
+	catch(std::bad_alloc&) 
+	{
+		std::cout << "Allocation failed" << std::endl;
+		return (NULL);
+	}
 }

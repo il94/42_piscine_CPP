@@ -7,10 +7,10 @@
 
 /* utils.cpp */
 std::string	getFileContent(std::ifstream &toRead);
-const char	*generateOutputName(std::string baseName);
+const char	*generateOutputName(std::string &baseName);
 
 /* run.cpp*/
-void		run(char *inputFile, std::string s1, std::string s2);
+void		run(std::string inputFile, std::string s1, std::string s2);
 
 /* checkData.cpp*/
 bool		isValidInput(int nbParameters, char *s1);

@@ -6,12 +6,12 @@ int main( void )
 	std::string *stringPTR = &brain;
 	std::string &stringREF = brain;
 
-	std::cout << "Adresse de brain     : " << &brain << std::endl;
-	std::cout << "Adresse de stringPTR : " << stringPTR << std::endl;
-	std::cout << "Adresse de stringREF : " << &stringREF << std::endl;
-	std::cout << "=======================" << std::endl;
-	std::cout << "Valeur de brain     : " << brain << std::endl;
-	std::cout << "Valeur de stringPTR : " << *stringPTR << std::endl;
-	std::cout << "Valeur de stringPTR : " << stringREF << std::endl;
+	std::cout << "Adresse de brain		: " << &brain << std::endl;
+	std::cout << "Adresse de brain dans stringPTR	: " << stringPTR << std::endl;
+	std::cout << "Adresse de brain dans stringREF	: " << &stringREF << std::endl;
+	std::cout << "==================================================" << std::endl;
+	std::cout << "Valeur de brain			: " << brain << std::endl;
+	std::cout << "Valeur de brain par stringPTR	: " << *stringPTR << std::endl;
+	std::cout << "Valeur de brain par stringREF	: " << stringREF << std::endl;
 	return (0);
 }
