@@ -31,10 +31,10 @@ fclean :
 	$(MAKE_SILENT) fclean -C cpp03/ex02
 	$(MAKE_SILENT) fclean -C cpp03/ex03
 
-	# $(MAKE_SILENT) fclean -C cpp04/ex00
-	# $(MAKE_SILENT) fclean -C cpp04/ex01
-	# $(MAKE_SILENT) fclean -C cpp04/ex02
-	# $(MAKE_SILENT) fclean -C cpp04/ex03
+	$(MAKE_SILENT) fclean -C cpp04/ex00
+	$(MAKE_SILENT) fclean -C cpp04/ex01
+	$(MAKE_SILENT) fclean -C cpp04/ex02
+	$(MAKE_SILENT) fclean -C cpp04/ex03
 
 	# $(MAKE_SILENT) fclean -C cpp05/ex00
 	# $(MAKE_SILENT) fclean -C cpp05/ex01

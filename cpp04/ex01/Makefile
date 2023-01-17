@@ -2,7 +2,7 @@
 #                                   TARGETS                                    #
 #==============================================================================#
 
-NAME = name
+NAME = burn
 
 #==============================================================================#
 #                                   COMMANDS                                   #
@@ -36,13 +36,14 @@ OBJ_DIR = obj/
 #                                   SOURCES                                    #
 #==============================================================================#
 
-SRC = main.cpp \
+SRC = main.cpp Animal.cpp Cat.cpp Dog.cpp WrongAnimal.cpp WrongCat.cpp Brain.cpp
 
 #==============================================================================#
 #                                   HEADERS                                    #
 #==============================================================================#
 
-HEAD = $(addprefix $(HEADER_DIR), name.h name.hpp) \
+HEAD = $(addprefix $(HEADER_DIR), Animal.hpp Cat.hpp Dog.hpp WrongAnimal.hpp \
+									WrongCat.hpp Brain.hpp) \
 
 #==============================================================================#
 #                                   OBJECTS                                    #
