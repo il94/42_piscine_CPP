@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include "I_character.hpp"
+#include "A_Materia.hpp"
 
 class Character : public I_Character
 {
@@ -17,7 +18,10 @@ class Character : public I_Character
 	Character&	operator=(const Character&);
 
 	/* Methods */
-	
+	virtual std::string const&	getName( void ) const;
+	virtual void				equip(A_Materia* m);
+	virtual void				unequip(int idx);
+	virtual void				use(int idx, I_Character& target);
 
 	/* Accessors */
 	
@@ -25,8 +29,8 @@ class Character : public I_Character
 	private :
 
 	/* Attributes */
-	
-
+	std::string	_name;	
+	A_Materia	*_inventory;
 };
 
 #endif

@@ -29,7 +29,6 @@ class I_Character
 	private :
 
 	/* Attributes */
-	A_Materia	*inventory;
 
 };
 

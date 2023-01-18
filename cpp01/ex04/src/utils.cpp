@@ -7,7 +7,6 @@ std::string getFileContent(std::ifstream &toRead)
 
 	while (std::getline(toRead, buffer))
 	{
-		std::cout << "[" << buffer << "]" << std::endl;
 		fileContent += buffer;
 		if (not toRead.eof())
 			fileContent += "\n";
