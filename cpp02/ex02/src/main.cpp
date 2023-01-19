@@ -24,13 +24,16 @@ int main( void )
 	Fixed const d( 999.499f );
 
 	std::cout << "==============================" << std::endl;
+	std::cout << std::endl;
 
 	std::cout << "[A] is " << a;
 	std::cout << " || [B] is " << b;
 	std::cout << " || [C] is " << c;
 	std::cout << " || [D] is " << d << std::endl;
 
+	std::cout << std::endl;
 	std::cout << "==============================" << std::endl;
+	std::cout << std::endl;
 
 	std::cout << "[A < B] is [" << a << " < " << b << "] is " << (a < b) << std::endl;
 	std::cout << "[A > B] is [" << a << " > " << b << "] is " << (a > b) << std::endl;
@@ -41,14 +44,18 @@ int main( void )
 	std::cout << "[A == A] is [" << a << " == " << a << "] is " << (a == a) << std::endl;
 	std::cout << "[A != A] is [" << a << " != " << a << "] is " << (a != a) << std::endl;
 
+	std::cout << std::endl;
 	std::cout << "==============================" << std::endl;
+	std::cout << std::endl;
 
 	std::cout << "[A + A] is [" << a << " + " << a << "] is " << (a + a) << std::endl;
 	std::cout << "[A - A] is [" << a << " - " << a << "] is " << (a - a) << std::endl;
 	std::cout << "[A * A] is [" << a << " * " << a << "] is " << (a * a) << std::endl;
 	std::cout << "[A / A] is [" << a << " / " << a << "] is " << (a / a) << std::endl;
 
+	std::cout << std::endl;
 	std::cout << "==============================" << std::endl;
+	std::cout << std::endl;
 
 	std::cout << "[A++] is " << a++ << " -> " << a << std::endl;
 	std::cout << "[A--] is " << a-- << " -> " << a << std::endl;
@@ -56,7 +63,9 @@ int main( void )
 	std::cout << "[++A] is " << ++a << " -> " << a << std::endl;
 	std::cout << "[--A] is " << --a << " -> " << a << std::endl;
 
+	std::cout << std::endl;
 	std::cout << "==============================" << std::endl;
+	std::cout << std::endl;
 
 	std::cout << "[A min B] is [" << a << " min " << b << "] is " << Fixed::min( a, b ) << std::endl;
 	std::cout << "[A max B] is [" << a << " max " << b << "] is " << Fixed::max( a, b ) << std::endl;
@@ -64,6 +73,7 @@ int main( void )
 	std::cout << "[C min D] is [" << c << " min " << d << "] is " << Fixed::min( c, d ) << std::endl;
 	std::cout << "[C max D] is [" << c << " max " << d << "] is " << Fixed::max( d, d ) << std::endl;
 
+	std::cout << std::endl;
 	std::cout << "==============================" << std::endl;
 
 	return (0);

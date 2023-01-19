@@ -36,15 +36,15 @@ class Fixed
 	Fixed	operator--( int );
 
 	/* Methods */
-	float			toFloat(void) const;
-	int				toInt(void) const;
+	float			toFloat( void ) const;
+	int				toInt( void ) const;
 	static Fixed	min(Fixed &a, Fixed &b);
 	static Fixed	max(Fixed &a, Fixed &b);
 	static Fixed	min(const Fixed &a, const Fixed &b);
 	static Fixed	max(const Fixed &a, const Fixed &b);
 
 	/* Accessors */
-	int 			getRawBits(void) const;
+	int 			getRawBits( void ) const;
 	void 			setRawBits(int const raw);
 
 	private :

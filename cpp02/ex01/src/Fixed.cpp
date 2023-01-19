@@ -38,17 +38,17 @@ int Fixed::getRawBits( void ) const
 	return (_value);
 }
 
-void	Fixed::setRawBits( int const raw )
+void	Fixed::setRawBits(int const raw)
 {
 	_value = raw;
 }
 
-float	Fixed::toFloat(void) const
+float	Fixed::toFloat( void ) const
 {
 	return ((float)getRawBits() / (1 << _BITS));
 }
 
-int	Fixed::toInt(void) const
+int	Fixed::toInt( void ) const
 {
 	return (getRawBits() >> _BITS);
 }
