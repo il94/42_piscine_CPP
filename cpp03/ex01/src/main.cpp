@@ -45,6 +45,7 @@ int	main( void )
 	{
 		ScavTrap	gokuCopy(goku);
 	}
+
 	std::cout << std::endl;
 	return (0);
 }

@@ -61,6 +61,7 @@ int	main( void )
 	{
 		FragTrap	gokuCopy(goku);
 	}
+
 	std::cout << std::endl;
 	return (0);
 }

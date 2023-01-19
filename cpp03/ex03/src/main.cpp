@@ -77,6 +77,7 @@ int	main( void )
 	{
 		DiamondTrap	gokuCopy(goku);
 	}
+
 	std::cout << std::endl;
 	return (0);
 }

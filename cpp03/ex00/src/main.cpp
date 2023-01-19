@@ -34,6 +34,7 @@ int	main( void )
 	{
 		ClapTrap	gokuCopy(goku);
 	}
+
 	std::cout << std::endl;
 	return (0);
 }
