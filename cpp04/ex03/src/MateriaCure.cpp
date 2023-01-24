@@ -21,6 +21,7 @@ MateriaCure::~MateriaCure(){
 
 MateriaCure& MateriaCure::operator=(const MateriaCure &src)
 {
+	_type = src._type;
 	return (*this);
 }
 
@@ -35,7 +36,7 @@ A_Materia*	MateriaCure::clone( void ) const
 
 void	MateriaCure::use(I_Character& target)
 {
-	std::cout << "* heals " << "name" << "'s wounds *" << std::endl;
+	std::cout << "* heals " << target.getName() << "'s wounds *" << std::endl;
 }
 
 /*================================ Accessors =================================*/

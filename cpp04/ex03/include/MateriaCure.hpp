@@ -4,6 +4,7 @@
 #include <iostream>
 
 #include "A_Materia.hpp"
+#include "I_character.hpp"
 
 class MateriaCure : public A_Materia
 {
@@ -11,11 +12,9 @@ class MateriaCure : public A_Materia
 
 	/* Constructors */
 	MateriaCure();
-	MateriaCure(const MateriaCure&);
 	~MateriaCure();
 
 	/* Overloads */
-	MateriaCure&	operator=(const MateriaCure&);
 
 	/* Methods */
 	A_Materia*	clone( void ) const;
@@ -26,8 +25,13 @@ class MateriaCure : public A_Materia
 
 	private :
 
-	/* Attributes */
+	/* Overloads */
+	MateriaCure&	operator=(const MateriaCure&);
+
+	/* Methods */
+	MateriaCure(const MateriaCure&);
 	
+	/* Attributes */
 
 };
 

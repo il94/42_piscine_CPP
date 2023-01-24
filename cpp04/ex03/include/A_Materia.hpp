@@ -10,6 +10,7 @@ class A_Materia
 	/* Constructors */
 	A_Materia();
 	A_Materia(std::string const &type);
+	A_Materia(const A_Materia&);
 	~A_Materia();
 
 	/* Overloads */
@@ -25,7 +26,6 @@ class A_Materia
 	protected :
 
 	/* Constructors */
-	A_Materia(const A_Materia&);
 
 	/* Attributes */
 	std::string	_type;

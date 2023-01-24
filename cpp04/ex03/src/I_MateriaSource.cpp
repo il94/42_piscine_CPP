@@ -1,11 +1,12 @@
-#include "../include/I_Character.hpp"
+#include "I_MateriaSource.hpp"
 
 /*=============================== Constructors ===============================*/
 
-I_Character::~I_Character(){
+I_MateriaSource::~I_MateriaSource(){
 }
 
 /*================================ Overloads =================================*/
+
 
 /*================================= Methods ==================================*/
 

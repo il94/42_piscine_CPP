@@ -10,12 +10,7 @@ class I_Character
 	public :
 
 	/* Constructors */
-	I_Character();
-	I_Character(const I_Character&);
 	virtual ~I_Character();
-
-	/* Overloads */
-	I_Character&	operator=(const I_Character&);
 
 	/* Methods */
 	virtual std::string const&	getName( void ) const = 0;

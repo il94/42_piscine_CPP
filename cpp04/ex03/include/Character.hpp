@@ -3,7 +3,8 @@
 
 #include <iostream>
 #include "I_character.hpp"
-#include "A_Materia.hpp"
+#include "MateriaIce.hpp"
+#include "MateriaCure.hpp"
 
 class Character : public I_Character
 {
@@ -11,6 +12,7 @@ class Character : public I_Character
 
 	/* Constructors */
 	Character();
+	Character(const std::string &);
 	Character(const Character&);
 	~Character();
 
@@ -30,7 +32,8 @@ class Character : public I_Character
 
 	/* Attributes */
 	std::string	_name;	
-	A_Materia	*_inventory;
+	A_Materia	*_inventory[4];
+	int			_countMaterias;
 };
 
 #endif

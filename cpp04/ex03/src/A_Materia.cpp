@@ -24,6 +24,7 @@ A_Materia::~A_Materia(){
 
 A_Materia& A_Materia::operator=(const A_Materia &src)
 {
+	_type = src._type;
 	return (*this);
 }
 

@@ -1,11 +1,22 @@
-#include "../include/I_Character.hpp"
+#include "MateriaSource.hpp"
 
 /*=============================== Constructors ===============================*/
 
-I_Character::~I_Character(){
+MateriaSource::MateriaSource(){
+}
+
+MateriaSource::MateriaSource(const MateriaSource &src){
+	*this = src;
+}
+
+MateriaSource::~MateriaSource(){
 }
 
 /*================================ Overloads =================================*/
+
+MateriaSource& MateriaSource::operator=(const MateriaSource &src)
+{
+}
 
 /*================================= Methods ==================================*/
 

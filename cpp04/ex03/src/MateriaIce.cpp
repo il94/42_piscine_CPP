@@ -21,6 +21,7 @@ MateriaIce::~MateriaIce(){
 
 MateriaIce& MateriaIce::operator=(const MateriaIce &src)
 {
+	_type = src._type;
 	return (*this);
 }
 
@@ -35,7 +36,7 @@ A_Materia*	MateriaIce::clone( void ) const
 
 void	MateriaIce::use(I_Character& target)
 {
-	std::cout << "* shoots an ice bolt at " << "name" << std::endl;
+	std::cout << "* shoots an ice bolt at " << target.getName() << std::endl;
 }
 
 /*================================ Accessors =================================*/
