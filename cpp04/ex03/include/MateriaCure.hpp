@@ -4,7 +4,7 @@
 #include <iostream>
 
 #include "A_Materia.hpp"
-#include "I_character.hpp"
+#include "I_Character.hpp"
 
 class MateriaCure : public A_Materia
 {

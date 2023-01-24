@@ -2,7 +2,8 @@
 #define CHARACTER
 
 #include <iostream>
-#include "I_character.hpp"
+
+#include "I_Character.hpp"
 #include "MateriaIce.hpp"
 #include "MateriaCure.hpp"
 

@@ -5,6 +5,8 @@
 
 #include "A_Materia.hpp"
 
+class A_Materia;
+
 class I_Character
 {
 	public :

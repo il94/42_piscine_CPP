@@ -3,6 +3,10 @@
 
 #include <iostream>
 
+#include "I_Character.hpp"
+
+class I_Character;
+
 class A_Materia
 {
 	public :
@@ -11,7 +15,7 @@ class A_Materia
 	A_Materia();
 	A_Materia(std::string const &type);
 	A_Materia(const A_Materia&);
-	~A_Materia();
+	virtual ~A_Materia();
 
 	/* Overloads */
 	A_Materia&	operator=(const A_Materia&);

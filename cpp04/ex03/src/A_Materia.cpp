@@ -30,10 +30,10 @@ A_Materia& A_Materia::operator=(const A_Materia &src)
 
 /*================================= Methods ==================================*/
 
-// void	A_Materia::use(I_Character& target)
-// {
-
-// }
+void	A_Materia::use(I_Character& target)
+{
+	(void)target;
+}
 
 /*================================ Accessors =================================*/
 

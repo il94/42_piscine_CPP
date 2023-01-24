@@ -3,7 +3,11 @@
 
 #include <iostream>
 
-class MateriaSource
+#include "I_MateriaSource.hpp"
+#include "MateriaIce.hpp"
+#include "MateriaCure.hpp"
+
+class MateriaSource : public I_MateriaSource
 {
 	public :
 
@@ -16,7 +20,9 @@ class MateriaSource
 	MateriaSource&	operator=(const MateriaSource&);
 
 	/* Methods */
-	
+	void		learnMateria(A_Materia*);
+	A_Materia*	createMateria(std::string const & type);
+
 
 	/* Accessors */
 	
@@ -24,7 +30,8 @@ class MateriaSource
 	private :
 
 	/* Attributes */
-	
+	A_Materia	*_inventory[4];
+	int			_countMaterias;
 
 };
 

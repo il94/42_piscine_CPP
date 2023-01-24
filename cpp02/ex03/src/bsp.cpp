@@ -11,5 +11,5 @@ bool	bsp(Point const a, Point const b, Point const c, Point const point)
 	Fixed bc = vectorProduct(b, c, point);
 	Fixed ca = vectorProduct(c, a, point);
 
-	return ((ab >= 0 && bc >= 0 && ca >= 0) || (ab < 0 && bc < 0 && ca < 0));
+	return ((ab > 0 && bc > 0 && ca > 0) || (ab < 0 && bc < 0 && ca < 0));
 }

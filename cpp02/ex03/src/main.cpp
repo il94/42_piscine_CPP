@@ -12,5 +12,6 @@ int main( void )
 	std::cout << "[5] = " << bsp(Point(35, 80), Point(84, 8), Point(21, 27), Point(86, 85)) << std::endl;
 	std::cout << "[6] = " << bsp(Point(35, 80), Point(84, 8), Point(21, 27), Point(35, 78)) << std::endl;
 	std::cout << "[7] = " << bsp(Point(35, 80), Point(84, 8), Point(21, 27), Point(21, 27)) << std::endl;
+	std::cout << "[P] = " << bsp(Point(1, 1), Point(1, 1), Point(1, 1), Point(1, 1)) << std::endl;
 	return (0);
 }

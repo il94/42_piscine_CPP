@@ -27,8 +27,9 @@ Character::Character(const Character &src){
 }
 
 Character::~Character(){
-	std::cout << "[Character] Default desstructor called." << std::endl;
-	delete [] _inventory;
+	std::cout << "[Character] Default destructor called." << std::endl;
+	for (int i = 0; i < _countMaterias; i++)
+		delete _inventory[i];
 }
 
 /*================================ Overloads =================================*/
@@ -38,15 +39,16 @@ Character& Character::operator=(const Character &src)
 	_name = src._name;
 	_countMaterias = src._countMaterias;
 
-	delete [] _inventory;
-
 	for (int i = 0; i < _countMaterias; i++)
 	{
+		delete _inventory[i];
 		if (src._inventory[i]->getType() == "Ice")
 			_inventory[i] = new MateriaIce;
 		else if (src._inventory[i]->getType() == "Cure")
 			_inventory[i] = new MateriaCure;
 	}
+
+	return (*this);
 }
 
 /*================================= Methods ==================================*/
