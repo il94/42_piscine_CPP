@@ -4,10 +4,12 @@
 #include <iostream>
 
 #include "I_Character.hpp"
+#include "A_Materia.hpp"
 #include "MateriaIce.hpp"
 #include "MateriaCure.hpp"
 #include "MateriaFire.hpp"
 #include "MateriaLightning.hpp"
+
 
 class Character : public I_Character
 {

@@ -4,6 +4,7 @@
 #include <iostream>
 
 #include "I_MateriaSource.hpp"
+#include "A_Materia.hpp"
 #include "MateriaIce.hpp"
 #include "MateriaCure.hpp"
 #include "MateriaFire.hpp"

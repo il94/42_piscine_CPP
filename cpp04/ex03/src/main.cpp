@@ -1,8 +1,9 @@
-#include "../include/MateriaCure.hpp"
+#include "../include/A_Materia.hpp"
 #include "../include/MateriaIce.hpp"
-#include "../include/MateriaSource.hpp"
+#include "../include/MateriaCure.hpp"
 #include "../include/MateriaFire.hpp"
 #include "../include/MateriaLightning.hpp"
+#include "../include/MateriaSource.hpp"
 #include "../include/Character.hpp"
 
 // int main()
