@@ -2,22 +2,21 @@
 
 /*=============================== Constructors ===============================*/
 
-Animal::Animal() : _type("Meta"), _brain(new Brain){
+Animal::Animal() : _type("Meta"){
 	std::cout << "[Animal] Default constructor called." << std::endl;
 }
 
-Animal::Animal(std::string type) : _type(type), _brain(new Brain){
+Animal::Animal(std::string type) : _type(type){
 	std::cout << "[Animal] Parameters constructor called." << std::endl;
 }
 
-Animal::Animal(const Animal &src) : _brain(new Brain){
+Animal::Animal(const Animal &src){
 	std::cout << "[Animal] Copy constructor called." << std::endl;
 	*this = src;
 }
 
 Animal::~Animal(){
 	std::cout << "[Animal] Default destructor called." << std::endl;
-	delete _brain;
 	std::cout << getType() << " was destroyed" << std::endl;
 }
 
@@ -26,7 +25,6 @@ Animal::~Animal(){
 Animal& Animal::operator=(const Animal &src)
 {
 	_type = src._type;
-	*_brain = *(src._brain);
 	return (*this);
 }
 
@@ -35,9 +33,7 @@ Animal& Animal::operator=(const Animal &src)
 void	Animal::makeSound( void ) const{
 }
 
-void	Animal::wants( void ) const
-{
-	std::cout << getType() << " wants " <<  _brain->getRandomIdea() << std::endl;
+void	Animal::wants( void ) const{
 }
 
 /*================================ Accessors =================================*/

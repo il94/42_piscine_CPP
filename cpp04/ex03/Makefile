@@ -36,13 +36,13 @@ OBJ_DIR = obj/
 #                                   SOURCES                                    #
 #==============================================================================#
 
-SRC = main.cpp A_Materia.cpp MateriaCure.cpp MateriaIce.cpp Character.cpp I_Character.cpp I_MateriaSource.cpp MateriaSource.cpp \
+SRC = main.cpp A_Materia.cpp MateriaCure.cpp MateriaIce.cpp Character.cpp I_Character.cpp I_MateriaSource.cpp MateriaSource.cpp MateriaFire.cpp MateriaLightning.cpp \
 
 #==============================================================================#
 #                                   HEADERS                                    #
 #==============================================================================#
 
-HEAD = $(addprefix $(HEADER_DIR), A_Materia.hpp MateriaCure.hpp MateriaIce.hpp Character.hpp I_Character.hpp I_MateriaSource.hpp MateriaSource.hpp) \
+HEAD = $(addprefix $(HEADER_DIR), A_Materia.hpp MateriaCure.hpp MateriaIce.hpp Character.hpp I_Character.hpp I_MateriaSource.hpp MateriaSource.hpp MateriaFire.hpp MateriaLightning.hpp) \
 
 #==============================================================================#
 #                                   OBJECTS                                    #

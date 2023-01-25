@@ -42,9 +42,9 @@ Character& Character::operator=(const Character &src)
 	for (int i = 0; i < _countMaterias; i++)
 	{
 		delete _inventory[i];
-		if (src._inventory[i]->getType() == "Ice")
+		if (src._inventory[i]->getType() == "ice")
 			_inventory[i] = new MateriaIce;
-		else if (src._inventory[i]->getType() == "Cure")
+		else if (src._inventory[i]->getType() == "cure")
 			_inventory[i] = new MateriaCure;
 	}
 
@@ -57,12 +57,11 @@ void	Character::equip(A_Materia* m)
 {
 	if (_countMaterias < 4)
 	{
-		if (m->getType() == "Ice")
-			_inventory[_countMaterias] = new MateriaIce;
-		else if (m->getType() == "Cure")
-			_inventory[_countMaterias] = new MateriaIce;
+		_inventory[_countMaterias] = m;
 		_countMaterias++;
 	}
+	else
+		delete	m;
 }
 
 void	Character::unequip(int idx)
@@ -83,11 +82,7 @@ void	Character::unequip(int idx)
 void	Character::use(int idx, I_Character& target)
 {
 	if (idx >= 0 && idx <= 3 && _inventory[idx])
-	{
 		_inventory[idx]->use(target);
-		delete _inventory[idx];
-		unequip(idx);
-	}
 }
 
 /*================================ Accessors =================================*/

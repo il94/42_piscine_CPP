@@ -28,10 +28,14 @@ MateriaSource& MateriaSource::operator=(const MateriaSource &src)
 	for (int i = 0; i < _countMaterias; i++)
 	{
 		delete _inventory[i];
-		if (src._inventory[i]->getType() == "Ice")
+		if (src._inventory[i]->getType() == "ice")
 			_inventory[i] = new MateriaIce;
-		else if (src._inventory[i]->getType() == "Cure")
+		else if (src._inventory[i]->getType() == "cure")
 			_inventory[i] = new MateriaCure;
+		else if (src._inventory[i]->getType() == "fire")
+			_inventory[i] = new MateriaFire;
+		else if (src._inventory[i]->getType() == "lightning")
+			_inventory[i] = new MateriaLightning;
 	}
 
 	return (*this);
@@ -43,18 +47,28 @@ void	MateriaSource::learnMateria(A_Materia* model)
 {
 	if (_countMaterias < 4)
 	{
-		if (model->getType() == "Ice" || model->getType() == "Cure")
-			_inventory[_countMaterias] = model;
+		_inventory[_countMaterias] = model;
 		_countMaterias++;
 	}
+	else
+		delete model;
 }
 
 A_Materia*	MateriaSource::createMateria(std::string const & type)
 {
-	for (int i = 0; i < _countMaterias; i++)
+	for (int i = 0; _countMaterias <= 4 and i < _countMaterias; i++)
 	{
 		if (type == _inventory[i]->getType())
-			return (_inventory[i]);
+		{
+			if (_inventory[i]->getType() == "ice")
+				return (new MateriaIce);
+			else if (_inventory[i]->getType() == "cure")
+				return (new MateriaCure);
+			else if (_inventory[i]->getType() == "fire")
+				return (new MateriaFire);
+			else if (_inventory[i]->getType() == "lightning")
+				return (new MateriaLightning);
+		}
 	}
 	return (0);
 }

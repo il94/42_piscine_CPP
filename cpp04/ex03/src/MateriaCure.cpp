@@ -2,7 +2,7 @@
 
 /*=============================== Constructors ===============================*/
 
-MateriaCure::MateriaCure() : A_Materia("Cure"){
+MateriaCure::MateriaCure() : A_Materia("cure"){
 	std::cout << "[MateriaCure] Default constructor called." << std::endl;
 	std::cout << getType() << " was created." << std::endl;
 }

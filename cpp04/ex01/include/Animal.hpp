@@ -3,8 +3,6 @@
 
 #include <iostream>
 
-#include "Brain.hpp"
-
 class Animal
 {
 	public :
@@ -20,7 +18,7 @@ class Animal
 
 	/* Methods */
 	virtual void	makeSound( void ) const;
-	void			wants( void ) const;
+	virtual void	wants( void ) const;
 
 	/* Accessors */
 	std::string	getType( void ) const;
@@ -29,7 +27,6 @@ class Animal
 
 	/* Attributes */
 	std::string	_type;
-	Brain*	_brain;
 };
 
 #endif

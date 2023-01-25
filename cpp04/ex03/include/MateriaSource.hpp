@@ -6,6 +6,8 @@
 #include "I_MateriaSource.hpp"
 #include "MateriaIce.hpp"
 #include "MateriaCure.hpp"
+#include "MateriaFire.hpp"
+#include "MateriaLightning.hpp"
 
 class MateriaSource : public I_MateriaSource
 {

@@ -2,7 +2,7 @@
 
 /*=============================== Constructors ===============================*/
 
-MateriaIce::MateriaIce() : A_Materia("Ice"){
+MateriaIce::MateriaIce() : A_Materia("ice"){
 	std::cout << "[MateriaIce] Default constructor called." << std::endl;
 	std::cout << getType() << " was created." << std::endl;
 }
@@ -36,7 +36,7 @@ A_Materia*	MateriaIce::clone( void ) const
 
 void	MateriaIce::use(I_Character& target)
 {
-	std::cout << "* shoots an ice bolt at " << target.getName() << std::endl;
+	std::cout << "* shoots an ice bolt at " << target.getName() << " *" << std::endl;
 }
 
 /*================================ Accessors =================================*/

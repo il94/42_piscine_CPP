@@ -4,6 +4,7 @@
 #include <iostream>
 
 #include "Animal.hpp"
+#include "Brain.hpp"
 
 class Dog : public Animal
 {
@@ -12,13 +13,18 @@ class Dog : public Animal
 	/* Constructors */
 	Dog();
 	Dog(const Dog&);
-	~Dog();
+	virtual ~Dog();
 
 	/* Overloads */
 	Dog&	operator=(const Dog&);
 
 	/* Methods */
 	void	makeSound( void ) const;
+	void	wants( void ) const;
+
+	private :
+
+	Brain*	_brain;
 };
 
 #endif

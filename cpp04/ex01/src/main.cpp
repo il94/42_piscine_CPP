@@ -30,14 +30,6 @@ int main( void )
 	}
 	std::cout << std::endl;
 
-
-	Animal	copyAnimal(*animals[0]); //animals[0] is a dog
-	Animal	assignAnimal;
-	assignAnimal = *animals[0];
-	std::cout << std::endl;
-	std::cout << std::endl;
-
-
 	for (int i = 0; i < SIZE_ARRAY; i++)
 	{
 		animals[i]->wants();
@@ -53,10 +45,6 @@ int main( void )
 		delete animals[i];
 		std::cout << std::endl;
 	}
-	std::cout << std::endl;
 
-
-	copyAnimal.wants();
-	assignAnimal.wants();
 	return 0;
 }
