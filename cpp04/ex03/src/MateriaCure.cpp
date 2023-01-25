@@ -38,7 +38,3 @@ void	MateriaCure::use(I_Character& target)
 {
 	std::cout << "* heals " << target.getName() << "'s wounds *" << std::endl;
 }
-
-/*================================ Accessors =================================*/
-
-

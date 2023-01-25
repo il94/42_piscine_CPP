@@ -2,12 +2,12 @@
 
 /*=============================== Constructors ===============================*/
 
-Dog::Dog() : A_Animal("Dog") {
+Dog::Dog() : A_Animal("Dog"), _brain(new Brain){
 	std::cout << "[Dog] Default constructor called." << std::endl;
 	std::cout << getType() << " was created" << std::endl;
 }
 
-Dog::Dog(const Dog &src) : A_Animal(src) {
+Dog::Dog(const Dog &src) : A_Animal(src), _brain(new Brain){
 	std::cout << "[Dog] Copy constructor called." << std::endl;
 	*this = src;
 	std::cout << getType() << " was copied" << std::endl;
@@ -15,6 +15,7 @@ Dog::Dog(const Dog &src) : A_Animal(src) {
 
 Dog::~Dog(){
 	std::cout << "[Dog] Default destructor called." << std::endl;
+	delete _brain;
 }
 
 /*================================ Overloads =================================*/
@@ -31,4 +32,9 @@ Dog& Dog::operator=(const Dog &src)
 void	Dog::makeSound( void ) const
 {
 	std::cout << "WOUF WOUF" << std::endl;
+}
+
+void	Dog::wants( void ) const
+{
+	std::cout << getType() << " wants " <<  _brain->getRandomIdea() << std::endl;
 }

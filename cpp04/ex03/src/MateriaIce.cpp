@@ -38,7 +38,3 @@ void	MateriaIce::use(I_Character& target)
 {
 	std::cout << "* shoots an ice bolt at " << target.getName() << " *" << std::endl;
 }
-
-/*================================ Accessors =================================*/
-
-

@@ -18,31 +18,23 @@
 
 int main( void )
 {
-	A_Animal	*a_animals[SIZE_ARRAY];
+	A_Animal	*A_Animals[SIZE_ARRAY];
 
 	for (int i = 0; i < SIZE_ARRAY; i++)
 	{
 		if (i % 2 == 0)
-			a_animals[i] = new Dog;
+			A_Animals[i] = new Dog;
 		else
-			a_animals[i] = new Cat;
+			A_Animals[i] = new Cat;
 		std::cout << std::endl;
 	}
 	std::cout << std::endl;
 
-
-	// A_Animal	copyA_Animal(*a_animals[0]); //a_animals[0] is a dog
-	// A_Animal	assignA_Animal;
-	// assignA_Animal = *a_animals[0];
-	// std::cout << std::endl;
-	// std::cout << std::endl;
-
-
 	for (int i = 0; i < SIZE_ARRAY; i++)
 	{
-		a_animals[i]->wants();
-		a_animals[i]->wants();
-		a_animals[i]->makeSound();
+		A_Animals[i]->wants();
+		A_Animals[i]->wants();
+		A_Animals[i]->makeSound();
 		std::cout << std::endl;
 	}
 	std::cout << std::endl;
@@ -50,11 +42,9 @@ int main( void )
 
 	for (int i = 0; i < SIZE_ARRAY; i++)
 	{
-		delete a_animals[i];
+		delete A_Animals[i];
 		std::cout << std::endl;
 	}
 
-	// copyA_Animal.wants();
-	// assignA_Animal.wants();
 	return 0;
 }

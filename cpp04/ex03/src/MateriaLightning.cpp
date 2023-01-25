@@ -38,7 +38,3 @@ void	MateriaLightning::use(I_Character& target)
 {
 	std::cout << "* he brings down the thunder on " << target.getName() << " *" << std::endl;
 }
-
-/*================================ Accessors =================================*/
-
-

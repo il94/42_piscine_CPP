@@ -38,7 +38,3 @@ void	MateriaFire::use(I_Character& target)
 {
 	std::cout << "* shoots an fire bolt at " << target.getName() << " *" << std::endl;
 }
-
-/*================================ Accessors =================================*/
-
-

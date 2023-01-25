@@ -14,25 +14,17 @@ class MateriaLightning : public A_Materia
 	MateriaLightning();
 	~MateriaLightning();
 
-	/* Overloads */
-
 	/* Methods */
 	A_Materia*	clone( void ) const;
 	void		use(I_Character& target);
 
-	/* Accessors */
-	
-
 	private :
+
+	/* Constructors */
+	MateriaLightning(const MateriaLightning&);
 
 	/* Overloads */
 	MateriaLightning&	operator=(const MateriaLightning&);
-
-	/* Methods */
-	MateriaLightning(const MateriaLightning&);
-	
-	/* Attributes */
-
 };
 
 #endif

@@ -2,7 +2,7 @@
 
 /*=============================== Constructors ===============================*/
 
-Character::Character() : _name("unamed"), _countMaterias(0){
+Character::Character() : _name("unamed"), _countMaterias(0), _throwed(NULL){
 	std::cout << "[Character] Default constructor called." << std::endl;
 	_inventory[0] = NULL;
 	_inventory[1] = NULL;
@@ -11,7 +11,7 @@ Character::Character() : _name("unamed"), _countMaterias(0){
 	std::cout << getName() << " was created." << std::endl;
 }
 
-Character::Character(const std::string &name) : _name(name), _countMaterias(0){
+Character::Character(const std::string &name) : _name(name), _countMaterias(0), _throwed(NULL){
 	std::cout << "[Character] Parameters constructor called." << std::endl;
 	_inventory[0] = NULL;
 	_inventory[1] = NULL;
@@ -30,6 +30,8 @@ Character::~Character(){
 	std::cout << "[Character] Default destructor called." << std::endl;
 	for (int i = 0; i < _countMaterias; i++)
 		delete _inventory[i];
+	delete _throwed;
+	std::cout << getName() << " was destroyed." << std::endl;
 }
 
 /*================================ Overloads =================================*/
@@ -46,8 +48,23 @@ Character& Character::operator=(const Character &src)
 			_inventory[i] = new MateriaIce;
 		else if (src._inventory[i]->getType() == "cure")
 			_inventory[i] = new MateriaCure;
+		else if (src._inventory[i]->getType() == "fire")
+			_inventory[i] = new MateriaFire;
+		else if (src._inventory[i]->getType() == "lightning")
+			_inventory[i] = new MateriaLightning;
 	}
-
+	if (_throwed)
+	{
+		delete _throwed;
+		if (_throwed->getType() == "ice")
+			_throwed = new MateriaIce;
+		else if (_throwed->getType() == "cure")
+			_throwed = new MateriaCure;
+		else if (_throwed->getType() == "fire")
+			_throwed = new MateriaFire;
+		else if (_throwed->getType() == "lightning")
+			_throwed = new MateriaLightning;
+	}
 	return (*this);
 }
 
@@ -66,16 +83,20 @@ void	Character::equip(A_Materia* m)
 
 void	Character::unequip(int idx)
 {
-	if (idx >= 0 && idx <= 3 && _inventory[idx])
+	if (idx >= 0 && idx < _countMaterias && _inventory[idx])
 	{
-		for (int i = idx; i < 2; i++)
+		_countMaterias--;
+
+		if (_throwed)
+			delete _throwed;
+		_throwed = _inventory[idx];
+	
+		for (int i = idx; i < 3; i++)
 		{
 			_inventory[i] = _inventory[i + 1];
-			i++;
-			if (i == 2)
+			if (i == 3)
 				_inventory[i] = NULL;
 		}
-		/* desequip materia */
 	}
 }
 

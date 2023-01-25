@@ -14,25 +14,17 @@ class MateriaIce : public A_Materia
 	MateriaIce();
 	~MateriaIce();
 
-	/* Overloads */
-
 	/* Methods */
 	A_Materia*	clone( void ) const;
 	void		use(I_Character& target);
 
-	/* Accessors */
-	
-
 	private :
+
+	/* Constructors */
+	MateriaIce(const MateriaIce&);
 
 	/* Overloads */
 	MateriaIce&	operator=(const MateriaIce&);
-
-	/* Methods */
-	MateriaIce(const MateriaIce&);
-	
-	/* Attributes */
-
 };
 
 #endif

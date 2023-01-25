@@ -25,16 +25,11 @@ class MateriaSource : public I_MateriaSource
 	void		learnMateria(A_Materia*);
 	A_Materia*	createMateria(std::string const & type);
 
-
-	/* Accessors */
-	
-
 	private :
 
 	/* Attributes */
 	A_Materia	*_inventory[4];
 	int			_countMaterias;
-
 };
 
 #endif

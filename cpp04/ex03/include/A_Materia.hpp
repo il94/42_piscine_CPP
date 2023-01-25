@@ -13,12 +13,8 @@ class A_Materia
 
 	/* Constructors */
 	A_Materia();
-	A_Materia(std::string const &type);
 	A_Materia(const A_Materia&);
 	virtual ~A_Materia();
-
-	/* Overloads */
-	A_Materia&	operator=(const A_Materia&);
 
 	/* Methods */
 	virtual A_Materia*	clone( void ) const = 0;
@@ -30,6 +26,10 @@ class A_Materia
 	protected :
 
 	/* Constructors */
+	A_Materia(std::string const &type);
+
+	/* Overloads */
+	A_Materia&	operator=(const A_Materia&);
 
 	/* Attributes */
 	std::string	_type;

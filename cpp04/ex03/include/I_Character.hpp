@@ -19,14 +19,6 @@ class I_Character
 	virtual void				equip(A_Materia* m) = 0;
 	virtual void				unequip(int idx) = 0;
 	virtual void				use(int idx, I_Character& target) = 0;
-
-	/* Accessors */
-	
-
-	private :
-
-	/* Attributes */
-
 };
 
 #endif

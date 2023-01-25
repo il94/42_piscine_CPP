@@ -72,7 +72,3 @@ A_Materia*	MateriaSource::createMateria(std::string const & type)
 	}
 	return (0);
 }
-
-/*================================ Accessors =================================*/
-
-
