@@ -5,7 +5,7 @@
 Bureaucrat::Bureaucrat() : _name("unamed"){
 	std::cout << "[Bureaucrat] Default constructor called." << std::endl;
 	setGrade(150);
-	std::cout << getName() << " was created." << std::endl;
+	std::cout << *this << " was created." << std::endl;
 }
 
 Bureaucrat::Bureaucrat(const std::string &name, int grade) : _name(name){
@@ -14,15 +14,15 @@ Bureaucrat::Bureaucrat(const std::string &name, int grade) : _name(name){
 	std::cout << *this << " was created." << std::endl;
 }
 
-Bureaucrat::Bureaucrat(const Bureaucrat &src){
+Bureaucrat::Bureaucrat(const Bureaucrat &src) : _name(src._name){
 	std::cout << "[Bureaucrat] Copy constructor called." << std::endl;
 	*this = src;
-	std::cout << getName() << " was copied." << std::endl;
+	std::cout << *this << " was copied." << std::endl;
 }
 
 Bureaucrat::~Bureaucrat(){
 	std::cout << "[Bureaucrat] Default destructor called." << std::endl;
-	std::cout << getName() << " was destroyed." << std::endl;
+	std::cout << *this << " was destroyed." << std::endl;
 }
 
 /*================================ Overloads =================================*/
@@ -53,7 +53,7 @@ int	Bureaucrat::getGrade( void ) const{
 	return (_grade);
 }
 
-void	Bureaucrat::setGrade(int grade)
+void	Bureaucrat::setGrade(int grade) throw()
 {
 	try
 	{
@@ -66,12 +66,12 @@ void	Bureaucrat::setGrade(int grade)
 	}
 	catch (GradeTooHighException&)
 	{
-		std::cout << grade << " is too high for a grade" << std::endl;
+		std::cout << grade << " is too high a grade" << std::endl;
 		_grade = 1;
 	}
 	catch (GradeTooLowException&)
 	{
-		std::cout << grade << " is too low for a grade" << std::endl;
+		std::cout << grade << " is too low a grade" << std::endl;
 		_grade = 150;
 	}
 }

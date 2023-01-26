@@ -27,7 +27,8 @@ class Bureaucrat
 	/* Accessors */
 	std::string	getName( void ) const;
 	int			getGrade( void ) const;
-	void		setGrade(int grade);
+	void		setGrade(int grade) throw();
+
 
 	private :
 

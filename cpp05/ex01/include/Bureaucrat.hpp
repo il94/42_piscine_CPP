@@ -3,6 +3,10 @@
 
 #include <iostream>
 
+#include "Form.hpp"
+
+class Form;
+
 class Bureaucrat
 {
 	public :
@@ -23,11 +27,13 @@ class Bureaucrat
 	/* Methods */
 	void		upgrade( void );
 	void		downgrade( void );
+	void		signForm( Form& );
 
 	/* Accessors */
 	std::string	getName( void ) const;
 	int			getGrade( void ) const;
-	void		setGrade(int grade);
+	void		setGrade(int grade) throw();
+
 
 	private :
 
