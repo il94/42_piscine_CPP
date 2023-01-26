@@ -41,7 +41,6 @@ class Character : public I_Character
 	A_Materia	*_inventory[4];
 	int			_countMaterias;
 	A_Materia	*_throwed;
-	// int			_countThrowedMaterias;
 };
 
 #endif
