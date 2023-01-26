@@ -62,7 +62,7 @@ $(NAME) : $(OBJ)
 	echo "$(GREEN)Done$(END)"
 
 $(OBJ_DIR)%.o : $(SRC_DIR)%.cpp $(HEAD) Makefile
-	$(CC) $(CXXFLAGS) $(DFLAGS) -c $< -o $@
+	$(CXX) $(CXXFLAGS) $(DFLAGS) -c $< -o $@
 
 $(OBJ_DIR) :
 	$(MKDIR) $(OBJ_DIR)
