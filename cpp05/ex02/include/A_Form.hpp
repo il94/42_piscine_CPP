@@ -1,5 +1,5 @@
-#ifndef FORM
-#define FORM
+#ifndef A_FORM
+#define A_FORM
 
 #include <iostream>
 
@@ -7,7 +7,7 @@
 
 class Bureaucrat;
 
-class Form
+class A_Form
 {
 	public :
 
@@ -17,12 +17,12 @@ class Form
 	};
 
 	/* Constructors */
-	Form(const std::string name, const int gradeToSign, const int gradeToExecute);
-	Form(const Form&);
-	~Form();
+	A_Form(const std::string name, const int gradeToSign, const int gradeToExecute);
+	A_Form(const A_Form&);
+	virtual ~A_Form();
 
 	/* Overloads */
-	Form&	operator=(const Form&);
+	A_Form&	operator=(const A_Form&);
 
 	/* Methods */
 	void		beSigned( Bureaucrat& );
@@ -36,10 +36,10 @@ class Form
 	void		setGradeToExecute(int grade) throw();
 
 
-	private :
+	protected :
 
 	/* Constructors */
-	Form();
+	A_Form();
 
 	/* Attributes */
 	const std::string	_name;
@@ -48,6 +48,6 @@ class Form
 	int					_gradeToExecute;
 };
 
-std::ostream&	operator<<(std::ostream &flow, Form const &value);
+std::ostream&	operator<<(std::ostream &flow, A_Form const &value);
 
 #endif

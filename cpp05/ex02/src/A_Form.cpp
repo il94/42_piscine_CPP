@@ -1,36 +1,36 @@
-#include "../include/Form.hpp"
+#include "../include/A_Form.hpp"
 
 /*=============================== Constructors ===============================*/
 
-Form::Form() : _name("unamed"), _signed(false){
-	std::cout << "[Form] Default constructor called." << std::endl;
+A_Form::A_Form() : _name("unamed"), _signed(false){
+	std::cout << "[A_Form] Default constructor called." << std::endl;
 	setGradeToSign(150);
 	setGradeToExecute(150);
 	std::cout << *this << " was created." << std::endl;
 }
 
-Form::Form(const std::string name, const int gradeToSign, const int gradeToExecute) :
+A_Form::A_Form(const std::string name, const int gradeToSign, const int gradeToExecute) :
 	_name(name), _signed(false){
-	std::cout << "[Form] Parameters constructor called." << std::endl;
+	std::cout << "[A_Form] Parameters constructor called." << std::endl;
 	setGradeToSign(gradeToSign);
 	setGradeToExecute(gradeToExecute);
 	std::cout << *this << " was created." << std::endl;
 }
 
-Form::Form(const Form &src) : _name(src._name){
-	std::cout << "[Form] Copy constructor called." << std::endl;
+A_Form::A_Form(const A_Form &src) : _name(src._name){
+	std::cout << "[A_Form] Copy constructor called." << std::endl;
 	*this = src;
 	std::cout << *this << " was copied." << std::endl;
 }
 
-Form::~Form(){
-	std::cout << "[Form] Default destructor called." << std::endl;
+A_Form::~A_Form(){
+	std::cout << "[A_Form] Default destructor called." << std::endl;
 	std::cout << *this << " was destroyed." << std::endl;
 }
 
 /*================================ Overloads =================================*/
 
-Form& Form::operator=(const Form &src)
+A_Form& A_Form::operator=(const A_Form &src)
 {
 	_signed = src._signed;
 	_gradeToSign = src._gradeToSign;
@@ -40,7 +40,7 @@ Form& Form::operator=(const Form &src)
 
 /*================================= Methods ==================================*/
 
-void	Form::beSigned(Bureaucrat& member)
+void	A_Form::beSigned(Bureaucrat& member)
 {
 	if (member.getGrade() <= getGradeToSign())
 		_signed = true;
@@ -50,23 +50,23 @@ void	Form::beSigned(Bureaucrat& member)
 
 /*================================ Accessors =================================*/
 
-std::string	Form::getName( void ) const{
+std::string	A_Form::getName( void ) const{
 	return (_name);
 }
 
-bool	Form::isSigned( void ) const{
+bool	A_Form::isSigned( void ) const{
 	return (_signed);
 }
 
-int	Form::getGradeToSign( void ) const{
+int	A_Form::getGradeToSign( void ) const{
 	return (_gradeToSign);
 }
 
-int	Form::getGradeToExecute( void ) const{
+int	A_Form::getGradeToExecute( void ) const{
 	return (_gradeToExecute);
 }
 
-void	Form::setGradeToSign(int grade) throw()
+void	A_Form::setGradeToSign(int grade) throw()
 {
 	try
 	{
@@ -89,7 +89,7 @@ void	Form::setGradeToSign(int grade) throw()
 	}
 }
 
-void	Form::setGradeToExecute(int grade) throw()
+void	A_Form::setGradeToExecute(int grade) throw()
 {
 	try
 	{
@@ -112,7 +112,7 @@ void	Form::setGradeToExecute(int grade) throw()
 	}
 }
 
-std::ostream&	operator<<(std::ostream &flow, Form const &value)
+std::ostream&	operator<<(std::ostream &flow, A_Form const &value)
 {
 	flow << value.getName() << " | to sign : " << value.getGradeToSign();
 	flow << " | to execute : " << value.getGradeToExecute();
