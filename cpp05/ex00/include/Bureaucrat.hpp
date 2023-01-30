@@ -7,9 +7,20 @@ class Bureaucrat
 {
 	public :
 
-	class GradeTooHighException : public std::exception{
+	class BureaucratException : public std::exception
+	{
+		public :
+		virtual const char* what( void ) const throw() = 0;
 	};
-	class GradeTooLowException : public std::exception{
+	class GradeTooHighException : public BureaucratException
+	{
+		public :
+		virtual const char* what( void ) const throw() { return ("[Exception] Grade too high"); }
+	};
+	class GradeTooLowException : public BureaucratException
+	{
+		public :
+		virtual const char* what( void ) const throw() { return ("[Exception] Grade too low"); }
 	};
 
 	/* Constructors */
@@ -23,11 +34,11 @@ class Bureaucrat
 	/* Methods */
 	void		upgrade( void );
 	void		downgrade( void );
+	void		checkGrade(int grade);
 
 	/* Accessors */
 	std::string	getName( void ) const;
 	int			getGrade( void ) const;
-	void		setGrade(int grade) throw();
 
 
 	private :

@@ -2,7 +2,7 @@
 #                                   TARGETS                                    #
 #==============================================================================#
 
-NAME = form
+NAME = formatForm
 
 #==============================================================================#
 #                                   COMMANDS                                   #
@@ -36,13 +36,14 @@ OBJ_DIR = obj/
 #                                   SOURCES                                    #
 #==============================================================================#
 
-SRC = main.cpp Bureaucrat.cpp Form.cpp\
+SRC = main.cpp Bureaucrat.cpp A_Form.cpp PresidentialPardonForm.cpp \
+		RobotomyRequestForm.cpp ShrubberyCreationForm.cpp \
 
 #==============================================================================#
 #                                   HEADERS                                    #
 #==============================================================================#
 
-HEAD = $(addprefix $(HEADER_DIR), Bureaucrat.hpp Form.hpp) \
+HEAD = $(addprefix $(HEADER_DIR), Bureaucrat.hpp A_Form.hpp PresidentialPardonForm.hpp RobotomyRequestForm.hpp ShrubberyCreationForm.hpp) \
 
 #==============================================================================#
 #                                   OBJECTS                                    #

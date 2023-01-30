@@ -1,7 +1,8 @@
-#ifndef ShrubberyCreationForm
-#define ShrubberyCreationForm
+#ifndef SHRUBBERYCREATIONFORM
+#define SHRUBBERYCREATIONFORM
 
 #include <iostream>
+#include <fstream>
 
 #include "A_Form.hpp"
 
@@ -18,10 +19,8 @@ class ShrubberyCreationForm : public A_Form
 	ShrubberyCreationForm&	operator=(const ShrubberyCreationForm&);
 
 	/* Methods */
-	
+	void	execute(Bureaucrat const & executor) const;
 
-	/* Accessors */
-	
 
 	private :
 

@@ -2,15 +2,14 @@
 
 /*=============================== Constructors ===============================*/
 
-Bureaucrat::Bureaucrat() : _name("unamed"){
+Bureaucrat::Bureaucrat() : _name("unamed"), _grade(150){
 	std::cout << "[Bureaucrat] Default constructor called." << std::endl;
-	setGrade(150);
 	std::cout << *this << " was created." << std::endl;
 }
 
-Bureaucrat::Bureaucrat(const std::string &name, int grade) : _name(name){
+Bureaucrat::Bureaucrat(const std::string &name, int grade) : _name(name), _grade(grade){
 	std::cout << "[Bureaucrat] Parameters constructor called." << std::endl;
-	setGrade(grade);
+	checkGrade(grade);
 	std::cout << *this << " was created." << std::endl;
 }
 
@@ -36,11 +35,35 @@ Bureaucrat& Bureaucrat::operator=(const Bureaucrat &src)
 /*================================= Methods ==================================*/
 
 void Bureaucrat::upgrade( void ){
-	setGrade(_grade - 1);
+	try
+	{
+		checkGrade(_grade - 1);
+		_grade = _grade - 1;
+		std::cout << getName() << " has been upgraded !" << std::endl;
+	}
+	catch (BureaucratException& e){
+		std::cout << e.what() << std::endl;
+	}
 }
 
 void Bureaucrat::downgrade( void ){
-	setGrade(_grade + 1);
+	try
+	{
+		checkGrade(_grade + 1);
+		_grade = _grade + 1;
+		std::cout << getName() << " has been downgraded..." << std::endl;
+	}
+	catch (BureaucratException& e){
+		std::cout << e.what() << std::endl;
+	}
+}
+
+void	Bureaucrat::checkGrade(int grade)
+{
+	if (grade < 1)
+		throw (GradeTooHighException());
+	else if (grade > 150)
+		throw (GradeTooLowException());
 }
 
 /*================================ Accessors =================================*/
@@ -51,29 +74,6 @@ std::string	Bureaucrat::getName( void ) const{
 
 int	Bureaucrat::getGrade( void ) const{
 	return (_grade);
-}
-
-void	Bureaucrat::setGrade(int grade) throw()
-{
-	try
-	{
-		if (grade < 1)
-			throw (GradeTooHighException());
-		else if (grade > 150)
-			throw (GradeTooLowException());
-		else
-			_grade = grade;
-	}
-	catch (GradeTooHighException&)
-	{
-		std::cout << grade << " is too high a grade" << std::endl;
-		_grade = 1;
-	}
-	catch (GradeTooLowException&)
-	{
-		std::cout << grade << " is too low a grade" << std::endl;
-		_grade = 150;
-	}
 }
 
 std::ostream&	operator<<(std::ostream &flow, Bureaucrat const &value)

@@ -1,42 +1,46 @@
 #include "../include/Bureaucrat.hpp"
-#include "../include/Form.hpp"
+#include "../include/ShrubberyCreationForm.hpp"
+#include "../include/PresidentialPardonForm.hpp"
+#include "../include/RobotomyRequestForm.hpp"
 
 int	main( void )
 {
 	Bureaucrat	nouveau("Célestin", 150);
-	std::cout << std::endl;
-
 	Bureaucrat	manager("Titouanville", 75);
-	std::cout << std::endl;
-
 	Bureaucrat	boss("M.Landolsi", 1);
 
 	std::cout << std::endl;
 	std::cout << "===================================" << std::endl;
 	std::cout << std::endl;
 
-	Form	cdi("CDI", -1, -1);
+	ShrubberyCreationForm	trees("Tree");
 	std::cout << std::endl;
 
-	Form	augmentation("Augmentation", 1, 1);
+	RobotomyRequestForm	robot("Dimitri");
 	std::cout << std::endl;
 
-	Form	morceauDePapier("Morceau de papier", 100, 151);
+	PresidentialPardonForm	zaphod("Brigabroug");
 
 	std::cout << std::endl;
 	std::cout << "===================================" << std::endl;
 	std::cout << std::endl;
 	
-	nouveau.signForm(augmentation);
+	nouveau.executeForm(zaphod);
+	boss.signForm(zaphod);
+	nouveau.executeForm(zaphod);
 	std::cout << std::endl;
 
-	manager.signForm(morceauDePapier);
+	boss.signForm(trees);
+	manager.executeForm(trees);
 	std::cout << std::endl;
 
-	manager.signForm(cdi);
+	boss.signForm(robot);
+	boss.executeForm(robot);
+	boss.executeForm(robot);
 	std::cout << std::endl;
 
-	boss.signForm(cdi);
+	boss.signForm(zaphod);
+	boss.executeForm(zaphod);
 	std::cout << std::endl;
 
 	return (0);

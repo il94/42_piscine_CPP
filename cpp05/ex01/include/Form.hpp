@@ -11,9 +11,21 @@ class Form
 {
 	public :
 
-	class GradeTooHighException : public std::exception{
+	class FormException : public std::exception
+	{
+		public :
+		virtual const char* what( void ) const throw() = 0;
 	};
-	class GradeTooLowException : public std::exception{
+
+	class GradeTooHighException : public FormException
+	{
+		public :
+		const char* what( void ) const throw() { return ("[Exception] Grade too high"); }
+	};
+	class GradeTooLowException : public FormException
+	{
+		public :
+		const char* what( void ) const throw() { return ("[Exception] Grade too low"); }
 	};
 
 	/* Constructors */
@@ -25,6 +37,7 @@ class Form
 	Form&	operator=(const Form&);
 
 	/* Methods */
+	void		checkGrade(int grade);
 	void		beSigned( Bureaucrat& );
 
 	/* Accessors */
@@ -32,8 +45,6 @@ class Form
 	bool		isSigned( void ) const;
 	int			getGradeToSign( void ) const;
 	int			getGradeToExecute( void ) const;
-	void		setGradeToSign(int grade) throw();
-	void		setGradeToExecute(int grade) throw();
 
 
 	private :
@@ -44,8 +55,8 @@ class Form
 	/* Attributes */
 	const std::string	_name;
 	bool				_signed;
-	int					_gradeToSign;
-	int					_gradeToExecute;
+	const int			_gradeToSign;
+	const int			_gradeToExecute;
 };
 
 std::ostream&	operator<<(std::ostream &flow, Form const &value);
