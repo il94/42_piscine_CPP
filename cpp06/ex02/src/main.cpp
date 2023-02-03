@@ -25,5 +25,9 @@ int	main( void )
 	identify(*base1);
 	identify(*base2);
 	identify(*base3);	
+
+	delete base1;
+	delete base2;
+	delete base3;
 	return (0);
 }
