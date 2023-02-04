@@ -49,7 +49,7 @@ fclean :
 	$(MAKE_SILENT) fclean -C cpp07/ex01
 	$(MAKE_SILENT) fclean -C cpp07/ex02
 
-	# $(MAKE_SILENT) fclean -C cpp08/ex00
+	$(MAKE_SILENT) fclean -C cpp08/ex00
 	# $(MAKE_SILENT) fclean -C cpp08/ex01
 	# $(MAKE_SILENT) fclean -C cpp08/ex02
 
