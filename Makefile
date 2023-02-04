@@ -41,13 +41,13 @@ fclean :
 	$(MAKE_SILENT) fclean -C cpp05/ex02
 	$(MAKE_SILENT) fclean -C cpp05/ex03
 
-	# $(MAKE_SILENT) fclean -C cpp06/ex00
-	# $(MAKE_SILENT) fclean -C cpp06/ex01
-	# $(MAKE_SILENT) fclean -C cpp06/ex02
+	$(MAKE_SILENT) fclean -C cpp06/ex00
+	$(MAKE_SILENT) fclean -C cpp06/ex01
+	$(MAKE_SILENT) fclean -C cpp06/ex02
 
-	# $(MAKE_SILENT) fclean -C cpp07/ex00
-	# $(MAKE_SILENT) fclean -C cpp07/ex01
-	# $(MAKE_SILENT) fclean -C cpp07/ex02
+	$(MAKE_SILENT) fclean -C cpp07/ex00
+	$(MAKE_SILENT) fclean -C cpp07/ex01
+	$(MAKE_SILENT) fclean -C cpp07/ex02
 
 	# $(MAKE_SILENT) fclean -C cpp08/ex00
 	# $(MAKE_SILENT) fclean -C cpp08/ex01

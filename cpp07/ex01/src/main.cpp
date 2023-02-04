@@ -1,25 +1,36 @@
 #include "../include/iter.h"
 
-// template< typename T >
-// void	show(T& x)
-// {
-// 	std::cout << T << std::endl;
-// }
+#define SIZE_MAX 3
 
+void	badDisplay(int element)
+{
+	std::cout << element << std::endl;
+}
 
 int main( void )
 {
-	int*	array = new int [3];
+	int			arrayInt[] = {1, 2, 3};
+	char		arrayChar[] = {'a', 'b', 'c'};
+	std::string	arrayString[] = {"Hello", "Hola", "Sawubona (bonjour en Zoulou)"};
 
-	array[0] = 0;
-	array[1] = 1;
-	array[2] = 2;
+	iter(arrayInt, SIZE_MAX, badDisplay);
+	std::cout << std::endl;
 
-	iter(array, 3, show);
+	iter(arrayChar, SIZE_MAX, badDisplay);
 
-	// std::cout << std::endl;
-	// std::cout << "===================================" << std::endl;
-	// std::cout << std::endl;
+	// iter(arrayString, SIZE_MAX, badDisplay); (ne compile pas)
+
+	std::cout << std::endl;
+	std::cout << "===================================" << std::endl;
+	std::cout << std::endl;
+
+	iter(arrayInt, SIZE_MAX, display<int>);
+	std::cout << std::endl;
+
+	iter(arrayChar, SIZE_MAX, display<char>);
+	std::cout << std::endl;
+
+	iter(arrayString, SIZE_MAX, display<std::string>);
 
 	return (0);
 }

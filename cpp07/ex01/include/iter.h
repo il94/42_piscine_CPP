@@ -3,14 +3,16 @@
 
 #include <iostream>
 
-template< typename W >
-void	show(W x)
+void	badDisplay(int element);
+
+template< typename W>
+void	display(W element)
 {
-	std::cout << x << std::endl;
+	std::cout << element << ", but displayed by an INSANE TEMPLATE BRO" << std::endl;
 }
 
-template< typename T, typename U, typename V >
-void	iter(T* array, U sizeArray, V function)
+template< typename T, typename U, typename V>
+void	iter(T *array, U sizeArray, V function)
 {
 	for (int i = 0; i < sizeArray; i++)
 		function(array[i]);
