@@ -53,5 +53,9 @@ fclean :
 	$(MAKE_SILENT) fclean -C cpp08/ex01
 	$(MAKE_SILENT) fclean -C cpp08/ex02
 
+	$(MAKE_SILENT) fclean -C cpp09/ex00
+	# $(MAKE_SILENT) fclean -C cpp09/ex01
+	# $(MAKE_SILENT) fclean -C cpp09/ex02
+
 .PHONY : fclean
 .SILENT :
