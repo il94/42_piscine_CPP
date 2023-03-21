@@ -6,6 +6,7 @@
 
 #include <string>
 #include <stack>
+#include <queue>
 #include <algorithm>
 
 class RPN
@@ -21,8 +22,6 @@ class RPN
 	RPN&	operator=(const RPN&);
 
 	/* Methods */
-	long long	applyRPN( void );
-
 	template < typename T >
 	void	pushElement(T element)
 	{
@@ -41,19 +40,20 @@ class RPN
 			_operators.pop();
 	}
 
+	long long	applyRPN( void );
+
 	/* Accessors */
 	long long	getResult( void );
+	int			getSizeValues( void );
+	int			getSizeOperators( void );
 
 	private :
 
 	/* Attributes */
-	// const std::string	_charOperators = "+-*/"
 
 	std::stack<int>		_values;
-	std::stack<char>	_operators;
+	std::queue<char>	_operators;
 	long long			_result;
-
-
 };
 
 #endif
