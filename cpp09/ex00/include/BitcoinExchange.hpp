@@ -7,6 +7,13 @@
 #include <vector>
 #include <map>
 
+#define RED "\033[31m"
+#define PURPLE "\033[35m"
+#define GREEN "\033[32m"
+#define YELLOW "\033[33m"
+#define END "\033[0m"
+
+
 bool	isCSVFile( const std::string &src );
 
 class BitcoinExchange
