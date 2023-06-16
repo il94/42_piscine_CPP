@@ -1,140 +1,62 @@
 #include "../include/BitcoinExchange.hpp"
 
-bool	strIsDigit(const std::string &str)
+bool	isInt(const char* str)
 {
-	int	i = 0;
+    char	*endPtr;
+	long	result = strtol(str, &endPtr, 10);
 
-	while (i < str.size())
-	{
-		// std::cout << RED << str[i] << END << std::endl;
-		if (std::isdigit(str[i]) == false and str[i] != ' ' and str[i] != '.')
-		{
-			if (str[i] == '.' and i != 0 and str[i - 1] )
-			return (false);
-		}
-		i++;
-	}
+	// if (*str != '\0' and *endPtr == '\0'
+	// 	and (result >= INT32_MIN and result <= INT32_MAX))
+	// 	std::cout << RED << "Is int" << END << std::endl;
+	// else
+	// 	std::cout << RED << "Not int" << END << std::endl;
 
-	return (true);
+    return (*str != '\0' and *endPtr == '\0'
+		and (result >= INT32_MIN and result <= INT32_MAX));
 }
 
-std::vector<std::string>	split(const std::string &str, char delimiter)
+bool	isFloat(const char* str)
 {
-    std::vector<std::string>	result;
-    std::string::size_type		start = 0;
-    std::string::size_type		end = str.find(delimiter);
+	char*	endPtr;
+	double	result = strtod(str, &endPtr);
 
-    while (end != std::string::npos)
-    {
-        result.push_back(str.substr(start, end - start));
-        start = end + 1;
-        end = str.find(delimiter, start);
-    }
+	// if (*str != '\0' and *endPtr == '\0'
+	// 	and (result >= INT32_MIN and result <= INT32_MAX))
+	// 	std::cout << RED << "Is int" << END << std::endl;
+	// else
+	// 	std::cout << RED << "Not int" << END << std::endl;
 
-    result.push_back(str.substr(start));
-
-    return (result);
+    return (*str != '\0' and *endPtr == '\0'
+		and (result >= INT32_MIN and result <= INT32_MAX));
 }
 
-bool	isCSVFile( const std::string &src ) {
-	return (not src.empty() and src.rfind(".csv") != -1);
+/*===================================================================*/
+
+void	exitMessage(const std::string &message)
+{
+	std::cerr << message << std::endl;
+	exit (EXIT_FAILURE);
 }
 
 void	isValidInput(const int &numberParameters, const char *fileName)
 {
-	std::ifstream	dataBase("data.csv");
-	if (not dataBase.good())
-		throw (std::runtime_error("[ERROR] Error opening data.csv"));
-
 	if (numberParameters != 1)
 	{
 		if (numberParameters < 1)
-			throw (std::runtime_error("[ERROR] Need an argument"));
+			exitMessage("[ERROR] Need an argument");
 		else
-			throw (std::runtime_error("[ERROR] Too many arguments"));
+			exitMessage("[ERROR] Too many arguments");
 	}
-
-	std::ifstream	file(fileName);
-	if (not file.good())
-		throw (std::runtime_error("[ERROR] Error opening \"" + std::string(fileName) + "\""));
-}
-
-
-bool	isValidDate(const std::string &str)
-{
-	std::vector<std::string>	date = split(str, '-');
-	int							element;
-
-	for (std::vector<std::string>::iterator	it = date.begin(); it != date.end(); it++)
-	{
-		// std::cout << YELLOW << *it << END << std::endl;
-		if (not strIsDigit(*it))
-			return (false);
-	}
-
-	if (date.size() != 3)
-		return (false);
-
-	return (true);
-}
-
-bool	isValidValue(const std::string &str)
-{
-	std::cout << YELLOW << str << END << std::endl;
-	if (not strIsDigit(str))
-		return (false);
-	
-	return (true);
-}
-
-
-bool	isValidDataLine(const std::string &line)
-{
-
-	std::cout << GREEN << line << END << std::endl;
-
-	if (line.find('|') == -1)
-		return (false);
-	
-	if (not isValidDate(line.substr(0, line.find('|'))))
-		return (false);
-
-	if (not isValidValue(line.substr(line.find("| ") + 2)))
-		return (false);
-
-	return (true);
-}
-
-void	isValidInputFile(const std::string &fileName)
-{
-	std::ifstream	file(fileName);
-	if (not file.good())
-		throw (std::runtime_error("[ERROR] Error opening \"" + std::string(fileName) + "\""));
-
-	std::string		buffer;
-	bool			firstLine = true;
-	while (std::getline(file, buffer))
-	{
-		if (firstLine)
-		{
-			if (buffer != "date | value")
-				throw (std::runtime_error("[ERROR] " + buffer + " is an invalid line"));
-			firstLine = false;
-		}
-		else
-		{
-			if (not isValidDataLine(buffer))
-				throw (std::runtime_error("[ERROR] " + buffer + " is an invalid line"));
-		}
-	}
-
 }
 
 int	main(int ac, char **av)
 {
-	try{
+	try
+	{
+		BitcoinExchange	BTC("data.csv");
+
 		isValidInput(ac - 1, *(av + 1));
-		isValidInputFile(*(av + 1));
+		BTC.fill(*(av + 1));
 	}
 	catch(const std::exception& e)
 	{

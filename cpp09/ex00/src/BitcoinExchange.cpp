@@ -10,11 +10,11 @@ BitcoinExchange::BitcoinExchange( const std::string &src )
 {
 	std::cout << "[BitcoinExchange] Parameters constructor called." << std::endl;
 
-	// try{
-	// 	isCSVFile(src);
-	// 	extractDataBase(src);
+	std::ifstream	dataBase("data.csv");
+	if (not dataBase.good())
+		throw (std::runtime_error("[ERROR] Error opening data.csv"));
 
-	// }
+	/* fill dataBase */
 }
 
 
@@ -38,7 +38,107 @@ BitcoinExchange&	BitcoinExchange::operator=(const BitcoinExchange &src)
 
 /*================================= Methods ==================================*/
 
+bool	BitcoinExchange::isValidDate(const std::string &str)
+{
+	std::map<std::string, std::string>	date = splitDate(str, '-');
 
+	if (date.size() != 3)
+		return (false);
+
+	for (std::map<std::string, std::string>::iterator	it = date.begin(); it != date.end(); it++)
+	{
+		if (not isInt(it->second.c_str()))
+			return (false);
+	}
+
+	int	year = std::atoi(date["YEAR"].c_str());
+	int	month = std::atoi(date["MONTH"].c_str());
+	int	day = std::atoi(date["DAY"].c_str());
+
+	if (year < 2009)
+		return (false);
+	if (month < 1 or month > 12)
+		return (false);
+	if (day < 1 or day > 31)
+		return (false);
+
+	return (true);
+}
+
+void	BitcoinExchange::fill(const std::string &sourceFile)
+{
+	std::ifstream	file(sourceFile);
+	if (not file.good())
+		return ;
+	
+	result.clear();
+
+
+	std::pair<std::string, std::string>	element;
+
+	std::string		buffer;
+	bool			firstLine = true;
+
+	while (std::getline(file, buffer))
+	{
+		if (firstLine and buffer == "date | value")
+			firstLine = false;
+		else if (buffer.find('|') != -1)
+		{
+			element.first = buffer.substr(0, buffer.find('|'));
+			element.first.erase(remove_if(element.first.begin(), element.first.end(), isspace), element.first.end());
+			if (not isValidDate(element.first))
+				element.second = "INVALID"; /* set message d'erreur*/
+			else
+			{
+				element.second = buffer.substr(buffer.find("| "));
+				element.second.erase(remove_if(element.second.begin(), element.second.end(), isspace), element.second.end());
+				/* ... */
+			}
+		}
+	}
+	file.close();
+}
+
+std::map<std::string, std::string>	BitcoinExchange::splitDate(const std::string &str, char delimiter)
+{
+    std::map<std::string, std::string>	result;
+	std::pair<std::string, std::string>	element;
+    std::string::size_type				start = 0;
+    std::string::size_type				end = str.find(delimiter);
+	int									i = 0;
+
+    while (end != std::string::npos)
+    {
+		if (i == 0)
+			element.first = "YEAR";
+		else if (i == 1)
+			element.first = "MONTH";
+		else if (i == 2)
+			element.first = "DAY";
+		else
+			element.first = "DATA";
+		element.second = str.substr(start, end - start);
+        result.insert(element);
+        start = end + 1;
+        end = str.find(delimiter, start);
+		i++;
+    }
+	if (i == 2)
+		element.first = "DAY";
+	else
+		element.first = "DATA";
+	element.second = str.substr(start);
+	result.insert(element);
+
+    return (result);
+}
+
+void	BitcoinExchange::exitMessage(const std::string &message)
+{
+	std::cerr << message << std::endl;
+	exit (EXIT_FAILURE);
+}
 
 /*================================ Accessors =================================*/
 

@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <fstream>
+#include <algorithm>
 
 #include <vector>
 #include <map>
@@ -13,8 +14,8 @@
 #define YELLOW "\033[33m"
 #define END "\033[0m"
 
-
-bool	isCSVFile( const std::string &src );
+bool	isInt(const char* str);
+bool	isFloat(const char* str);
 
 class BitcoinExchange
 {
@@ -30,6 +31,11 @@ class BitcoinExchange
 
 	/* Methods */
 	
+	void		fill(const std::string &sourceFile);
+	void		exitMessage(const std::string &message);
+	bool		isValidDate(const std::string &str);
+
+	std::map<std::string, std::string>	splitDate(const std::string &str, char delimiter);
 
 	/* Accessors */
 	std::vector<std::string>		getDataBase( void ) const ;
@@ -44,8 +50,20 @@ class BitcoinExchange
 	BitcoinExchange();
 
 	/* Attributes */
-	std::vector<std::string>		dataBase;
-	std::map<std::string, float>	result;
+	std::map<std::string, float>	dataBase;
+	std::map<std::string, std::string>	result;
 };
+
+template <typename T>
+void	displayMap(const T &map, const std::string &name)
+{
+	if (map.empty() == true)
+		std::cout << RED  << name << " EMPTY" << END << std::endl;
+	else
+	{
+		for (typename T::const_iterator it = map.begin(); it != map.end(); it++)
+			std::cout << name + " " << it->first << " = " << it->second << std::endl;
+	}
+}
 
 #endif
