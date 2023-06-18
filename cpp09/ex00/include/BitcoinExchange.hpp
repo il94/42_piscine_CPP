@@ -17,7 +17,7 @@
 bool	isInt(const char* str);
 bool	isFloat(const char* str);
 
-class BitcoinExchange
+class BitcoinExchange : public std::map<std::string, float>
 {
 	public :
 
@@ -31,9 +31,11 @@ class BitcoinExchange
 
 	/* Methods */
 	
+	void		evaluate( void );
 	void		fill(const std::string &sourceFile);
 	void		exitMessage(const std::string &message);
 	bool		isValidDate(const std::string &str);
+	bool		isValidValue(const std::string &str);
 
 	std::map<std::string, std::string>	splitDate(const std::string &str, char delimiter);
 
@@ -50,8 +52,7 @@ class BitcoinExchange
 	BitcoinExchange();
 
 	/* Attributes */
-	std::map<std::string, float>	dataBase;
-	std::map<std::string, std::string>	result;
+	std::map<std::string, std::string>	toEvaluate;
 };
 
 template <typename T>

@@ -14,7 +14,20 @@ BitcoinExchange::BitcoinExchange( const std::string &src )
 	if (not dataBase.good())
 		throw (std::runtime_error("[ERROR] Error opening data.csv"));
 
-	/* fill dataBase */
+	std::string						buffer;
+	std::pair<std::string, float>	element;
+
+	std::getline(dataBase, buffer);
+
+	while (std::getline(dataBase, buffer))
+	{
+		if (buffer.find(',') != -1)
+		{
+			element.first = buffer.substr(0, buffer.find(','));
+			element.second = std::atof(buffer.substr(buffer.find(',') + 1).c_str());
+			insert(element);
+		}
+	}
 }
 
 
@@ -31,8 +44,7 @@ BitcoinExchange::~BitcoinExchange(){
 
 BitcoinExchange&	BitcoinExchange::operator=(const BitcoinExchange &src)
 {
-	dataBase = src.dataBase;
-	result = src.result;
+	toEvaluate = src.toEvaluate;
 	return (*this);
 }
 
@@ -65,14 +77,39 @@ bool	BitcoinExchange::isValidDate(const std::string &str)
 	return (true);
 }
 
+bool	BitcoinExchange::isValidValue(const std::string &str)
+{
+	if (not isFloat(str.c_str()))
+		return (false);
+	
+	float	value = atof(str.c_str());
+
+	if (value < 0 or value > 1000)
+		return (false);
+
+	return (true);
+}
+
+void	BitcoinExchange::evaluate( void )
+{
+	if (empty() == true)
+		return ;
+	
+	displayMap(*this, "DATABASE");
+
+	std::cout << std::endl;
+
+	displayMap(toEvaluate, "TO EVAL");
+
+}
+
 void	BitcoinExchange::fill(const std::string &sourceFile)
 {
 	std::ifstream	file(sourceFile);
 	if (not file.good())
 		return ;
 	
-	result.clear();
-
+	toEvaluate.clear();
 
 	std::pair<std::string, std::string>	element;
 
@@ -87,14 +124,15 @@ void	BitcoinExchange::fill(const std::string &sourceFile)
 		{
 			element.first = buffer.substr(0, buffer.find('|'));
 			element.first.erase(remove_if(element.first.begin(), element.first.end(), isspace), element.first.end());
+			element.second = buffer.substr(buffer.find('|') + 1);
+			element.second.erase(remove_if(element.second.begin(), element.second.end(), isspace), element.second.end());
+
 			if (not isValidDate(element.first))
-				element.second = "INVALID"; /* set message d'erreur*/
-			else
-			{
-				element.second = buffer.substr(buffer.find("| "));
-				element.second.erase(remove_if(element.second.begin(), element.second.end(), isspace), element.second.end());
-				/* ... */
-			}
+				element.second += "| [ERROR] \"" + element.first + "\" is an invalid date";
+			else if (not isValidValue(element.second))
+				element.second += "|[ERROR] \"" + element.second + "\" is an invalid value";
+			
+			toEvaluate.insert(element);
 		}
 	}
 	file.close();

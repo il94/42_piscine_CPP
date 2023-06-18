@@ -5,12 +5,6 @@ bool	isInt(const char* str)
     char	*endPtr;
 	long	result = strtol(str, &endPtr, 10);
 
-	// if (*str != '\0' and *endPtr == '\0'
-	// 	and (result >= INT32_MIN and result <= INT32_MAX))
-	// 	std::cout << RED << "Is int" << END << std::endl;
-	// else
-	// 	std::cout << RED << "Not int" << END << std::endl;
-
     return (*str != '\0' and *endPtr == '\0'
 		and (result >= INT32_MIN and result <= INT32_MAX));
 }
@@ -19,12 +13,6 @@ bool	isFloat(const char* str)
 {
 	char*	endPtr;
 	double	result = strtod(str, &endPtr);
-
-	// if (*str != '\0' and *endPtr == '\0'
-	// 	and (result >= INT32_MIN and result <= INT32_MAX))
-	// 	std::cout << RED << "Is int" << END << std::endl;
-	// else
-	// 	std::cout << RED << "Not int" << END << std::endl;
 
     return (*str != '\0' and *endPtr == '\0'
 		and (result >= INT32_MIN and result <= INT32_MAX));
@@ -57,6 +45,7 @@ int	main(int ac, char **av)
 
 		isValidInput(ac - 1, *(av + 1));
 		BTC.fill(*(av + 1));
+		BTC.evaluate();
 	}
 	catch(const std::exception& e)
 	{
