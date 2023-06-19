@@ -31,6 +31,8 @@ class BitcoinExchange : public std::map<std::string, float>
 
 	/* Methods */
 	
+	void		printResultError(const std::pair<std::string, std::string> &src);
+	void		printResult(const std::pair<std::string, std::string> &src);
 	void		evaluate( void );
 	void		fill(const std::string &sourceFile);
 	void		exitMessage(const std::string &message);

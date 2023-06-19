@@ -90,6 +90,22 @@ bool	BitcoinExchange::isValidValue(const std::string &str)
 	return (true);
 }
 
+void	BitcoinExchange::printResultError(const std::pair<std::string, std::string> &src)
+{
+	std::cerr << RED << src.second.substr(src.second.find('|') + 1) << END << std::endl;
+}
+
+void	BitcoinExchange::printResult(const std::pair<std::string, std::string> &src)
+{
+
+	std::cout << src.second << " btc "
+
+
+	// At 2014-10-01, 0.3 bitcoins were worth $10
+
+	std::cerr << RED << src.second.substr(src.second.find('|') + 1) << END << std::endl;
+}
+
 void	BitcoinExchange::evaluate( void )
 {
 	if (empty() == true)
@@ -100,6 +116,34 @@ void	BitcoinExchange::evaluate( void )
 	std::cout << std::endl;
 
 	displayMap(toEvaluate, "TO EVAL");
+
+	// float	
+
+	for (std::map<std::string, std::string>::iterator it = toEvaluate.begin(); it != toEvaluate.end(); it++)
+	{
+		if (it->second.find('|') != -1)
+			printResultError(*it);
+		else
+		{
+			if (this->find(it->first) != this->end())
+			{
+				printResult(*it);
+				// std::cout << GREEN << "FIND" << END << std::endl;
+			}
+			else
+				std::cout << RED << "NOT FIND" << END << std::endl;
+
+		}
+
+
+		
+	}
+
+	// if (std::find(this->begin(), this->end(), 47115.9) != this->end())
+	// if (this->find("2022-03-29") != this->end())
+	// 	std::cout << GREEN << "FIND" << END << std::endl;
+	// else
+	// 	std::cout << RED << "NOT FIND" << END << std::endl;
 
 }
 
@@ -128,7 +172,7 @@ void	BitcoinExchange::fill(const std::string &sourceFile)
 			element.second.erase(remove_if(element.second.begin(), element.second.end(), isspace), element.second.end());
 
 			if (not isValidDate(element.first))
-				element.second += "| [ERROR] \"" + element.first + "\" is an invalid date";
+				element.second += "|[ERROR] \"" + element.first + "\" is an invalid date";
 			else if (not isValidValue(element.second))
 				element.second += "|[ERROR] \"" + element.second + "\" is an invalid value";
 			
