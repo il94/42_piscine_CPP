@@ -95,29 +95,49 @@ void	BitcoinExchange::printResultError(const std::pair<std::string, std::string>
 	std::cerr << RED << src.second.substr(src.second.find('|') + 1) << END << std::endl;
 }
 
-void	BitcoinExchange::printResult(const std::pair<std::string, std::string> &src)
+void	BitcoinExchange::printAdjustedResult(const std::pair<std::string, std::string> &src, const std::string &wrongDate, const float &price)
 {
+	float	result = std::atof(src.second.c_str()) * price;
 
-	std::cout << src.second << " btc "
+	std::cerr << RED << "[WARNING] No results found for " << wrongDate << END;
 
+	if (src.first == wrongDate)
+		std::cerr << std::endl;
+	else
+	{
+		std::cout << ", but at " << YELLOW << src.first << END;
+		std::cout << ", " << PURPLE << src.second << " btc" << END;
 
-	// At 2014-10-01, 0.3 bitcoins were worth $10
+		if (price > BTCPRICE)
+			std::cout << " were worth " << GREEN << result << " USD." << END << std::endl;
+		else
+			std::cout << " were worth " << RED << result << " USD." << END << std::endl;
+	}
+}
 
-	std::cerr << RED << src.second.substr(src.second.find('|') + 1) << END << std::endl;
+void	BitcoinExchange::printResult(const std::pair<std::string, std::string> &src, const float &price)
+{
+	float	result = std::atof(src.second.c_str()) * price;
+
+	std::cout << "At " << YELLOW << src.first << END;
+	std::cout << ", " << PURPLE << src.second << " btc" << END;
+
+	if (price > BTCPRICE)
+		std::cout << " were worth " << GREEN << result << " USD." << END << std::endl;
+	else
+		std::cout << " were worth " << RED << result << " USD." << END << std::endl;
+
 }
 
 void	BitcoinExchange::evaluate( void )
 {
-	if (empty() == true)
+	if (toEvaluate.empty() == true)
+	{
+		std::cerr << RED << "[WARNING] File is empty " << END << std::endl;
 		return ;
-	
-	displayMap(*this, "DATABASE");
+	}	
 
-	std::cout << std::endl;
-
-	displayMap(toEvaluate, "TO EVAL");
-
-	// float	
+	std::map<std::string, std::string>::iterator adjust;
 
 	for (std::map<std::string, std::string>::iterator it = toEvaluate.begin(); it != toEvaluate.end(); it++)
 	{
@@ -126,32 +146,23 @@ void	BitcoinExchange::evaluate( void )
 		else
 		{
 			if (this->find(it->first) != this->end())
-			{
-				printResult(*it);
-				// std::cout << GREEN << "FIND" << END << std::endl;
-			}
+				printResult(*it, (*this)[it->first]);
 			else
-				std::cout << RED << "NOT FIND" << END << std::endl;
-
+			{
+				adjust = it;
+				while (this->find(adjust->first) == this->end() and adjust != toEvaluate.begin())
+					adjust--;
+				printAdjustedResult(*adjust, it->first, (*this)[adjust->first]);
+			}
 		}
-
-
-		
 	}
-
-	// if (std::find(this->begin(), this->end(), 47115.9) != this->end())
-	// if (this->find("2022-03-29") != this->end())
-	// 	std::cout << GREEN << "FIND" << END << std::endl;
-	// else
-	// 	std::cout << RED << "NOT FIND" << END << std::endl;
-
 }
 
 void	BitcoinExchange::fill(const std::string &sourceFile)
 {
 	std::ifstream	file(sourceFile);
 	if (not file.good())
-		return ;
+		throw (std::runtime_error("[ERROR] Error opening \"" + sourceFile + "\"."));
 	
 	toEvaluate.clear();
 
@@ -162,6 +173,7 @@ void	BitcoinExchange::fill(const std::string &sourceFile)
 
 	while (std::getline(file, buffer))
 	{
+
 		if (firstLine and buffer == "date | value")
 			firstLine = false;
 		else if (buffer.find('|') != -1)

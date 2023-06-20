@@ -8,6 +8,8 @@
 #include <vector>
 #include <map>
 
+#define BTCPRICE 26877.30
+
 #define RED "\033[31m"
 #define PURPLE "\033[35m"
 #define GREEN "\033[32m"
@@ -32,7 +34,8 @@ class BitcoinExchange : public std::map<std::string, float>
 	/* Methods */
 	
 	void		printResultError(const std::pair<std::string, std::string> &src);
-	void		printResult(const std::pair<std::string, std::string> &src);
+	void		printAdjustedResult(const std::pair<std::string, std::string> &src, const std::string &wrongDate, const float &price);
+	void		printResult(const std::pair<std::string, std::string> &src, const float &price);
 	void		evaluate( void );
 	void		fill(const std::string &sourceFile);
 	void		exitMessage(const std::string &message);

@@ -43,14 +43,33 @@ int	main(int ac, char **av)
 	{
 		BitcoinExchange	BTC("data.csv");
 
+		std::cout << std::endl;
+		std::cout << "===================================" << std::endl;
+		std::cout << std::endl;
+
 		isValidInput(ac - 1, *(av + 1));
 		BTC.fill(*(av + 1));
 		BTC.evaluate();
+
+		std::cout << std::endl;
+		std::cout << "===================================" << std::endl;
+		std::cout << std::endl;
+
 	}
 	catch(const std::exception& e)
 	{
+		std::cout << std::endl;
+		std::cout << "===================================" << std::endl;
+		std::cout << std::endl;
+
 		std::cerr << e.what() << std::endl;
+
+		std::cout << std::endl;
+		std::cout << "===================================" << std::endl;
+		std::cout << std::endl;
+
 		return (EXIT_FAILURE);
 	}
+
 	return (EXIT_SUCCESS);
 }
