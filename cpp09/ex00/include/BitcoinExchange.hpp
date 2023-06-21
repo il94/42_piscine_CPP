@@ -33,9 +33,9 @@ class BitcoinExchange : public std::map<std::string, float>
 
 	/* Methods */
 	
-	void		printResultError(const std::pair<std::string, std::string> &src);
-	void		printAdjustedResult(const std::pair<std::string, std::string> &src, const std::string &wrongDate, const float &price);
-	void		printResult(const std::pair<std::string, std::string> &src, const float &price);
+	void		printResultError(const std::string &src);
+	void		printAdjustedResult(const std::string &date, const std::string &btcCount, const std::string &wrongDate);
+	void		printResult(const std::string &date, const std::string &btcCount);
 	void		evaluate( void );
 	void		fill(const std::string &sourceFile);
 	void		exitMessage(const std::string &message);
@@ -57,8 +57,20 @@ class BitcoinExchange : public std::map<std::string, float>
 	BitcoinExchange();
 
 	/* Attributes */
-	std::map<std::string, std::string>	toEvaluate;
+	std::map<std::string, std::vector<std::string>>	toEvaluate;
 };
+
+template <typename T>
+void	displayVector(const T &vector, const std::string &name)
+{
+	if (vector.empty() == true)
+		std::cout << RED  << name << " EMPTY" << END << std::endl;
+	else
+	{
+		for (typename T::const_iterator it = vector.begin(); it != vector.end(); it++)
+			std::cout << name + " = " << *it << std::endl;
+	}
+}
 
 template <typename T>
 void	displayMap(const T &map, const std::string &name)

@@ -90,39 +90,40 @@ bool	BitcoinExchange::isValidValue(const std::string &str)
 	return (true);
 }
 
-void	BitcoinExchange::printResultError(const std::pair<std::string, std::string> &src)
+void	BitcoinExchange::printResultError(const std::string &src)
 {
-	std::cerr << RED << src.second.substr(src.second.find('|') + 1) << END << std::endl;
+	std::cerr << RED << src.substr(src.find('|') + 1) << END << std::endl;
 }
 
-void	BitcoinExchange::printAdjustedResult(const std::pair<std::string, std::string> &src, const std::string &wrongDate, const float &price)
+void	BitcoinExchange::printAdjustedResult(const std::string &date, const std::string &btcCount, const std::string &wrongDate)
 {
-	float	result = std::atof(src.second.c_str()) * price;
+	float	result = std::atof(btcCount.c_str()) * (*this)[date];
 
 	std::cerr << RED << "[WARNING] No results found for " << wrongDate << END;
+	// std::cerr << PURPLE << "DATE = " << date << " | WDTE = " << wrongDate << END << std::endl;
 
-	if (src.first == wrongDate)
+	if (date == wrongDate)
 		std::cerr << std::endl;
 	else
 	{
-		std::cout << ", but at " << YELLOW << src.first << END;
-		std::cout << ", " << PURPLE << src.second << " btc" << END;
+		std::cout << ", but at " << YELLOW << date << END;
+		std::cout << ", " << PURPLE << btcCount << " btc" << END;
 
-		if (price > BTCPRICE)
+		if ((*this)[date] > BTCPRICE)
 			std::cout << " were worth " << GREEN << result << " USD." << END << std::endl;
 		else
 			std::cout << " were worth " << RED << result << " USD." << END << std::endl;
 	}
 }
 
-void	BitcoinExchange::printResult(const std::pair<std::string, std::string> &src, const float &price)
+void	BitcoinExchange::printResult(const std::string &date, const std::string &btcCount)
 {
-	float	result = std::atof(src.second.c_str()) * price;
+	float	result = std::atof(btcCount.c_str()) * (*this)[date];
 
-	std::cout << "At " << YELLOW << src.first << END;
-	std::cout << ", " << PURPLE << src.second << " btc" << END;
+	std::cout << "At " << YELLOW << date << END;
+	std::cout << ", " << PURPLE << btcCount << " btc" << END;
 
-	if (price > BTCPRICE)
+	if ((*this)[date] > BTCPRICE)
 		std::cout << " were worth " << GREEN << result << " USD." << END << std::endl;
 	else
 		std::cout << " were worth " << RED << result << " USD." << END << std::endl;
@@ -137,22 +138,31 @@ void	BitcoinExchange::evaluate( void )
 		return ;
 	}	
 
-	std::map<std::string, std::string>::iterator adjust;
+	std::map<std::string, float>::iterator adjust;
 
-	for (std::map<std::string, std::string>::iterator it = toEvaluate.begin(); it != toEvaluate.end(); it++)
+	for (std::map<std::string, std::vector<std::string>>::iterator it = toEvaluate.begin(); it != toEvaluate.end(); it++)
 	{
-		if (it->second.find('|') != -1)
-			printResultError(*it);
-		else
+		for (std::vector<std::string>::iterator value = it->second.begin(); value != it->second.end(); value++)
 		{
-			if (this->find(it->first) != this->end())
-				printResult(*it, (*this)[it->first]);
+			// std::cerr << PURPLE << "DATE = " << it->first << END << std::endl;
+			if (value->find('|') != -1)
+				printResultError(*value);
 			else
 			{
-				adjust = it;
-				while (this->find(adjust->first) == this->end() and adjust != toEvaluate.begin())
-					adjust--;
-				printAdjustedResult(*adjust, it->first, (*this)[adjust->first]);
+				if (this->find(it->first) != this->end())
+					printResult(it->first, *value);
+				else
+				{
+					adjust = (*this).upper_bound(it->first);
+
+					if (adjust != this->begin())
+					{
+						adjust--;
+						printAdjustedResult(adjust->first, *value, it->first);
+					}
+					else
+						std::cerr << RED << "[WARNING] No results found for " << it->first << '.' << END << std::endl;
+				}
 			}
 		}
 	}
@@ -188,9 +198,19 @@ void	BitcoinExchange::fill(const std::string &sourceFile)
 			else if (not isValidValue(element.second))
 				element.second += "|[ERROR] \"" + element.second + "\" is an invalid value";
 			
-			toEvaluate.insert(element);
+			toEvaluate[element.first].push_back(element.second);
 		}
 	}
+
+	// for (std::map<std::string, std::vector<std::string>>::iterator it = toEvaluate.begin(); it != toEvaluate.end(); it++)
+	// {
+	// 	std::cout << std::endl;
+	// 	std::cout << std::endl;
+	// 	displayVector(it->second, "PRINT");
+	// 	std::cout << std::endl;
+	// 	std::cout << std::endl;
+	// }
+
 	file.close();
 }
 
