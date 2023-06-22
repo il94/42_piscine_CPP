@@ -6,7 +6,7 @@ bool	isInt(const char* str)
 	long	result = strtol(str, &endPtr, 10);
 
     return (*str != '\0' and *endPtr == '\0'
-		and (result >= INT32_MIN and result <= INT32_MAX));
+		and (result >= INT_MIN and result <= INT_MAX));
 }
 
 bool	isFloat(const char* str)
@@ -15,7 +15,7 @@ bool	isFloat(const char* str)
 	double	result = strtod(str, &endPtr);
 
     return (*str != '\0' and *endPtr == '\0'
-		and (result >= INT32_MIN and result <= INT32_MAX));
+		and (result >= INT_MIN and result <= INT_MAX));
 }
 
 /*===================================================================*/
@@ -26,7 +26,7 @@ void	exitMessage(const std::string &message)
 	exit (EXIT_FAILURE);
 }
 
-void	isValidInput(const int &numberParameters, const char *fileName)
+void	isValidInput(const int &numberParameters)
 {
 	if (numberParameters != 1)
 	{
@@ -47,7 +47,7 @@ int	main(int ac, char **av)
 		std::cout << "===================================" << std::endl;
 		std::cout << std::endl;
 
-		isValidInput(ac - 1, *(av + 1));
+		isValidInput(ac - 1);
 		BTC.fill(*(av + 1));
 		BTC.evaluate();
 

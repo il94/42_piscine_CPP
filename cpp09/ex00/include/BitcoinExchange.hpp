@@ -4,7 +4,7 @@
 #include <iostream>
 #include <fstream>
 #include <algorithm>
-
+#include <climits> 
 #include <vector>
 #include <map>
 
@@ -57,7 +57,7 @@ class BitcoinExchange : public std::map<std::string, float>
 	BitcoinExchange();
 
 	/* Attributes */
-	std::map<std::string, std::vector<std::string>>	toEvaluate;
+	std::map<std::string, std::vector<std::string> >	toEvaluate;
 };
 
 template <typename T>

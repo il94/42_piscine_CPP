@@ -10,9 +10,9 @@ BitcoinExchange::BitcoinExchange( const std::string &src )
 {
 	std::cout << "[BitcoinExchange] Parameters constructor called." << std::endl;
 
-	std::ifstream	dataBase("data.csv");
+	std::ifstream	dataBase(src.c_str());
 	if (not dataBase.good())
-		throw (std::runtime_error("[ERROR] Error opening data.csv"));
+		throw (std::runtime_error("[ERROR] Error opening \"" + src + "\"."));
 
 	std::string						buffer;
 	std::pair<std::string, float>	element;
@@ -21,7 +21,7 @@ BitcoinExchange::BitcoinExchange( const std::string &src )
 
 	while (std::getline(dataBase, buffer))
 	{
-		if (buffer.find(',') != -1)
+		if (buffer.find(',') != std::string::npos)
 		{
 			element.first = buffer.substr(0, buffer.find(','));
 			element.second = std::atof(buffer.substr(buffer.find(',') + 1).c_str());
@@ -29,7 +29,6 @@ BitcoinExchange::BitcoinExchange( const std::string &src )
 		}
 	}
 }
-
 
 BitcoinExchange::BitcoinExchange( const BitcoinExchange &src ){
 	std::cout << "[BitcoinExchange] Copy constructor called." << std::endl;
@@ -100,7 +99,6 @@ void	BitcoinExchange::printAdjustedResult(const std::string &date, const std::st
 	float	result = std::atof(btcCount.c_str()) * (*this)[date];
 
 	std::cerr << RED << "[WARNING] No results found for " << wrongDate << END;
-	// std::cerr << PURPLE << "DATE = " << date << " | WDTE = " << wrongDate << END << std::endl;
 
 	if (date == wrongDate)
 		std::cerr << std::endl;
@@ -140,12 +138,11 @@ void	BitcoinExchange::evaluate( void )
 
 	std::map<std::string, float>::iterator adjust;
 
-	for (std::map<std::string, std::vector<std::string>>::iterator it = toEvaluate.begin(); it != toEvaluate.end(); it++)
+	for (std::map<std::string, std::vector<std::string> >::iterator it = toEvaluate.begin(); it != toEvaluate.end(); it++)
 	{
 		for (std::vector<std::string>::iterator value = it->second.begin(); value != it->second.end(); value++)
 		{
-			// std::cerr << PURPLE << "DATE = " << it->first << END << std::endl;
-			if (value->find('|') != -1)
+			if (value->find('|') != std::string::npos)
 				printResultError(*value);
 			else
 			{
@@ -170,7 +167,7 @@ void	BitcoinExchange::evaluate( void )
 
 void	BitcoinExchange::fill(const std::string &sourceFile)
 {
-	std::ifstream	file(sourceFile);
+	std::ifstream	file(sourceFile.c_str());
 	if (not file.good())
 		throw (std::runtime_error("[ERROR] Error opening \"" + sourceFile + "\"."));
 	
@@ -186,7 +183,7 @@ void	BitcoinExchange::fill(const std::string &sourceFile)
 
 		if (firstLine and buffer == "date | value")
 			firstLine = false;
-		else if (buffer.find('|') != -1)
+		else if (buffer.find('|') != std::string::npos)
 		{
 			element.first = buffer.substr(0, buffer.find('|'));
 			element.first.erase(remove_if(element.first.begin(), element.first.end(), isspace), element.first.end());
@@ -201,16 +198,6 @@ void	BitcoinExchange::fill(const std::string &sourceFile)
 			toEvaluate[element.first].push_back(element.second);
 		}
 	}
-
-	// for (std::map<std::string, std::vector<std::string>>::iterator it = toEvaluate.begin(); it != toEvaluate.end(); it++)
-	// {
-	// 	std::cout << std::endl;
-	// 	std::cout << std::endl;
-	// 	displayVector(it->second, "PRINT");
-	// 	std::cout << std::endl;
-	// 	std::cout << std::endl;
-	// }
-
 	file.close();
 }
 
