@@ -18,8 +18,6 @@ bool	isFloat(const char* str)
 		and (result >= INT_MIN and result <= INT_MAX));
 }
 
-/*===================================================================*/
-
 void	exitMessage(const std::string &message)
 {
 	std::cerr << message << std::endl;
@@ -36,6 +34,8 @@ void	isValidInput(const int &numberParameters)
 			exitMessage("[ERROR] Too many arguments");
 	}
 }
+
+/*============================================================================*/
 
 int	main(int ac, char **av)
 {

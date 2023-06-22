@@ -43,11 +43,127 @@ BitcoinExchange::~BitcoinExchange(){
 
 BitcoinExchange&	BitcoinExchange::operator=(const BitcoinExchange &src)
 {
-	toEvaluate = src.toEvaluate;
+	_toEvaluate = src._toEvaluate;
 	return (*this);
 }
 
 /*================================= Methods ==================================*/
+
+void	BitcoinExchange::evaluate( void )
+{
+	if (_toEvaluate.empty() == true)
+	{
+		std::cerr << RED << "[WARNING] File is empty " << END << std::endl;
+		return ;
+	}	
+
+	std::map<std::string, float>::iterator adjust;
+
+	for (t_Mstr_Vstr::iterator it = _toEvaluate.begin(); it != _toEvaluate.end(); it++)
+	{
+		for (std::vector<std::string>::iterator value = it->second.begin(); value != it->second.end(); value++)
+		{
+			if (value->find('|') != std::string::npos)
+				printResultError(*value);
+			else
+			{
+				if (this->find(it->first) != this->end())
+					printResult(it->first, *value);
+				else
+				{
+					adjust = (*this).upper_bound(it->first);
+
+					if (adjust != this->begin())
+					{
+						adjust--;
+						printAdjustedResult(adjust->first, *value, it->first);
+					}
+					else
+						std::cerr << RED << "[WARNING] No results found for " << it->first << '.' << END << std::endl;
+				}
+			}
+		}
+	}
+}
+
+void	BitcoinExchange::fill(const std::string &sourceFile)
+{
+	std::ifstream	file(sourceFile.c_str());
+	if (not file.good())
+		throw (std::runtime_error("[ERROR] Error opening \"" + sourceFile + "\"."));
+	
+	_toEvaluate.clear();
+
+	std::pair<std::string, std::string>	element;
+
+	std::string		buffer;
+	bool			firstLine = true;
+
+	while (std::getline(file, buffer))
+	{
+
+		if (firstLine and buffer == "date | value")
+			firstLine = false;
+		else if (buffer.find('|') != std::string::npos)
+		{
+			element.first = buffer.substr(0, buffer.find('|'));
+			element.first.erase(remove_if(element.first.begin(), element.first.end(), isspace), element.first.end());
+			element.second = buffer.substr(buffer.find('|') + 1);
+			element.second.erase(remove_if(element.second.begin(), element.second.end(), isspace), element.second.end());
+
+			if (not isValidDate(element.first))
+				element.second += "|[ERROR] \"" + element.first + "\" is an invalid date";
+			else if (not isValidValue(element.second))
+				element.second += "|[ERROR] \"" + element.second + "\" is an invalid value";
+			
+			_toEvaluate[element.first].push_back(element.second);
+		}
+	}
+	file.close();
+}
+
+/*============================================================================*/
+
+void	BitcoinExchange::printResult(const std::string &date, const std::string &btcCount)
+{
+	float	result = std::atof(btcCount.c_str()) * (*this)[date];
+
+	std::cout << "At " << YELLOW << date << END;
+	std::cout << ", " << PURPLE << btcCount << " btc" << END;
+
+	if ((*this)[date] > BTCPRICE)
+		std::cout << " were worth " << GREEN << result << " USD." << END << std::endl;
+	else
+		std::cout << " were worth " << RED << result << " USD." << END << std::endl;
+
+}
+
+void	BitcoinExchange::printAdjustedResult(const std::string &date, const std::string &btcCount, const std::string &wrongDate)
+{
+	float	result = std::atof(btcCount.c_str()) * (*this)[date];
+
+	std::cerr << RED << "[WARNING] No results found for " << wrongDate << END;
+
+	if (date == wrongDate)
+		std::cerr << std::endl;
+	else
+	{
+		std::cout << ", but at " << YELLOW << date << END;
+		std::cout << ", " << PURPLE << btcCount << " btc" << END;
+
+		if ((*this)[date] > BTCPRICE)
+			std::cout << " were worth " << GREEN << result << " USD." << END << std::endl;
+		else
+			std::cout << " were worth " << RED << result << " USD." << END << std::endl;
+	}
+}
+
+void	BitcoinExchange::printResultError(const std::string &src)
+{
+	std::cerr << RED << src.substr(src.find('|') + 1) << END << std::endl;
+}
+
+/*============================================================================*/
 
 bool	BitcoinExchange::isValidDate(const std::string &str)
 {
@@ -89,117 +205,7 @@ bool	BitcoinExchange::isValidValue(const std::string &str)
 	return (true);
 }
 
-void	BitcoinExchange::printResultError(const std::string &src)
-{
-	std::cerr << RED << src.substr(src.find('|') + 1) << END << std::endl;
-}
-
-void	BitcoinExchange::printAdjustedResult(const std::string &date, const std::string &btcCount, const std::string &wrongDate)
-{
-	float	result = std::atof(btcCount.c_str()) * (*this)[date];
-
-	std::cerr << RED << "[WARNING] No results found for " << wrongDate << END;
-
-	if (date == wrongDate)
-		std::cerr << std::endl;
-	else
-	{
-		std::cout << ", but at " << YELLOW << date << END;
-		std::cout << ", " << PURPLE << btcCount << " btc" << END;
-
-		if ((*this)[date] > BTCPRICE)
-			std::cout << " were worth " << GREEN << result << " USD." << END << std::endl;
-		else
-			std::cout << " were worth " << RED << result << " USD." << END << std::endl;
-	}
-}
-
-void	BitcoinExchange::printResult(const std::string &date, const std::string &btcCount)
-{
-	float	result = std::atof(btcCount.c_str()) * (*this)[date];
-
-	std::cout << "At " << YELLOW << date << END;
-	std::cout << ", " << PURPLE << btcCount << " btc" << END;
-
-	if ((*this)[date] > BTCPRICE)
-		std::cout << " were worth " << GREEN << result << " USD." << END << std::endl;
-	else
-		std::cout << " were worth " << RED << result << " USD." << END << std::endl;
-
-}
-
-void	BitcoinExchange::evaluate( void )
-{
-	if (toEvaluate.empty() == true)
-	{
-		std::cerr << RED << "[WARNING] File is empty " << END << std::endl;
-		return ;
-	}	
-
-	std::map<std::string, float>::iterator adjust;
-
-	for (std::map<std::string, std::vector<std::string> >::iterator it = toEvaluate.begin(); it != toEvaluate.end(); it++)
-	{
-		for (std::vector<std::string>::iterator value = it->second.begin(); value != it->second.end(); value++)
-		{
-			if (value->find('|') != std::string::npos)
-				printResultError(*value);
-			else
-			{
-				if (this->find(it->first) != this->end())
-					printResult(it->first, *value);
-				else
-				{
-					adjust = (*this).upper_bound(it->first);
-
-					if (adjust != this->begin())
-					{
-						adjust--;
-						printAdjustedResult(adjust->first, *value, it->first);
-					}
-					else
-						std::cerr << RED << "[WARNING] No results found for " << it->first << '.' << END << std::endl;
-				}
-			}
-		}
-	}
-}
-
-void	BitcoinExchange::fill(const std::string &sourceFile)
-{
-	std::ifstream	file(sourceFile.c_str());
-	if (not file.good())
-		throw (std::runtime_error("[ERROR] Error opening \"" + sourceFile + "\"."));
-	
-	toEvaluate.clear();
-
-	std::pair<std::string, std::string>	element;
-
-	std::string		buffer;
-	bool			firstLine = true;
-
-	while (std::getline(file, buffer))
-	{
-
-		if (firstLine and buffer == "date | value")
-			firstLine = false;
-		else if (buffer.find('|') != std::string::npos)
-		{
-			element.first = buffer.substr(0, buffer.find('|'));
-			element.first.erase(remove_if(element.first.begin(), element.first.end(), isspace), element.first.end());
-			element.second = buffer.substr(buffer.find('|') + 1);
-			element.second.erase(remove_if(element.second.begin(), element.second.end(), isspace), element.second.end());
-
-			if (not isValidDate(element.first))
-				element.second += "|[ERROR] \"" + element.first + "\" is an invalid date";
-			else if (not isValidValue(element.second))
-				element.second += "|[ERROR] \"" + element.second + "\" is an invalid value";
-			
-			toEvaluate[element.first].push_back(element.second);
-		}
-	}
-	file.close();
-}
+/*============================================================================*/
 
 std::map<std::string, std::string>	BitcoinExchange::splitDate(const std::string &str, char delimiter)
 {
@@ -235,12 +241,13 @@ std::map<std::string, std::string>	BitcoinExchange::splitDate(const std::string 
     return (result);
 }
 
-void	BitcoinExchange::exitMessage(const std::string &message)
-{
-	std::cerr << message << std::endl;
-	exit (EXIT_FAILURE);
-}
-
 /*================================ Accessors =================================*/
 
+t_Mstr_Vstr	BitcoinExchange::getToEvaluate( void ) const {
+	return (_toEvaluate);
+}
+
+void	BitcoinExchange::setToEvaluate(const t_Mstr_Vstr &src){
+	_toEvaluate = src;
+}
 

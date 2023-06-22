@@ -15,6 +15,8 @@
 #define YELLOW "\033[33m"
 #define END "\033[0m"
 
+void	exitMessage(const std::string &message);
+
 class RPN
 {
 	public :
@@ -28,45 +30,16 @@ class RPN
 	RPN&	operator=(const RPN&);
 
 	/* Methods */
-	// template < typename T >
-	// void	pushElement(T element)
-	// {
-	// 	if (std::isdigit(element))
-	// 		_values.push(element - 48);
-	// 	else
-	// 		_operators.push(element);
-	// }
+	long long	resolve( void );
 
-	// template < typename T >
-	// void	pushElement2(T element)
-	// {
-	// 	if (std::isdigit(element))
-	// 		_equation.push(element - 48);
-	// 	else
-	// 		_equation.push(element);
-	// }
-
-	// template < typename T >
-	// void	popElement(T element)
-	// {
-	// 	if (std::isdigit(element))
-	// 		_values.pop();
-	// 	else
-	// 		_operators.pop();
-	// }
-
-	long long	applyRPN( void );
-
-	bool		isInvalidSyntax(const int &countValues, const int &countOperators, const char &lastElement);
-	bool		isInvalidSyntax(const int &countValues, const int &countOperators);
-	bool		isValidChar(const std::string &VALID_SET, char c);
-	bool		isDigitUpper10(std::string &parameter, int i);
-	bool		isOperator(char const c);
+	void	checkSyntax(const int &countValues, const int &countOperators, const char &lastElement);
+	void	checkSyntax(const int &countValues, const int &countOperators);
+	bool	isValidChar(const std::string &VALID_SET, char c);
+	bool	isDigitUpper10(std::string &parameter, int i);
 
 	/* Accessors */
 	long long	getResult( void );
-	int			getSizeValues( void );
-	int			getSizeOperators( void );
+	void		setResult( const long long &src );
 
 	private :
 
@@ -74,7 +47,6 @@ class RPN
 	RPN();
 
 	/* Attributes */
-
 	std::string			_equation;
 	long long			_result;
 };

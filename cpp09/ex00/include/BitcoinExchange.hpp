@@ -16,6 +16,9 @@
 #define YELLOW "\033[33m"
 #define END "\033[0m"
 
+typedef std::map<std::string, std::vector<std::string> > t_Mstr_Vstr;
+
+void	exitMessage(const std::string &message);
 bool	isInt(const char* str);
 bool	isFloat(const char* str);
 
@@ -33,23 +36,21 @@ class BitcoinExchange : public std::map<std::string, float>
 
 	/* Methods */
 	
-	void		printResultError(const std::string &src);
-	void		printAdjustedResult(const std::string &date, const std::string &btcCount, const std::string &wrongDate);
-	void		printResult(const std::string &date, const std::string &btcCount);
-	void		evaluate( void );
-	void		fill(const std::string &sourceFile);
-	void		exitMessage(const std::string &message);
-	bool		isValidDate(const std::string &str);
-	bool		isValidValue(const std::string &str);
+	void	evaluate( void );
+	void	fill(const std::string &sourceFile);
+
+	void	printResult(const std::string &date, const std::string &btcCount);
+	void	printAdjustedResult(const std::string &date, const std::string &btcCount, const std::string &wrongDate);
+	void	printResultError(const std::string &src);
+
+	bool	isValidDate(const std::string &str);
+	bool	isValidValue(const std::string &str);
 
 	std::map<std::string, std::string>	splitDate(const std::string &str, char delimiter);
 
 	/* Accessors */
-	std::vector<std::string>		getDataBase( void ) const ;
-	std::map<std::string, float>	getResult( void ) const ;
-
-	void							setDataBase( const std::vector<std::string> & );
-	void							setResult( const std::map<std::string, float> & );
+	t_Mstr_Vstr	getToEvaluate( void ) const ;
+	void		setToEvaluate( const t_Mstr_Vstr & );
 	
 	private :
 
@@ -57,31 +58,7 @@ class BitcoinExchange : public std::map<std::string, float>
 	BitcoinExchange();
 
 	/* Attributes */
-	std::map<std::string, std::vector<std::string> >	toEvaluate;
+	t_Mstr_Vstr	_toEvaluate;
 };
-
-template <typename T>
-void	displayVector(const T &vector, const std::string &name)
-{
-	if (vector.empty() == true)
-		std::cout << RED  << name << " EMPTY" << END << std::endl;
-	else
-	{
-		for (typename T::const_iterator it = vector.begin(); it != vector.end(); it++)
-			std::cout << name + " = " << *it << std::endl;
-	}
-}
-
-template <typename T>
-void	displayMap(const T &map, const std::string &name)
-{
-	if (map.empty() == true)
-		std::cout << RED  << name << " EMPTY" << END << std::endl;
-	else
-	{
-		for (typename T::const_iterator it = map.begin(); it != map.end(); it++)
-			std::cout << name + " " << it->first << " = " << it->second << std::endl;
-	}
-}
 
 #endif
