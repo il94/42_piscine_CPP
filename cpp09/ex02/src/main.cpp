@@ -1,5 +1,10 @@
 #include "../include/PmergeMe.hpp"
 
+bool	operator<(const std::pair<int, int> &a, const std::pair<int, int> &b)
+{
+	return (a.second < b.second);
+}
+
 bool	isInt(const char* str)
 {
     char	*endPtr;
@@ -15,7 +20,7 @@ void	exitMessage(const std::string &message)
 	std::cout << "===================================" << std::endl;
 	std::cout << std::endl;
 
-	std::cerr << message << std::endl;
+	std::cout << message << std::endl;
 
 	std::cout << std::endl;
 	std::cout << "===================================" << std::endl;
@@ -36,9 +41,7 @@ int	main(int ac, char **av)
 		exitMessage("[ERROR] Need an argument");
 
 	PmergeMe	pmergeMe;
-
 	size_t		i = 1;
-	int			count[ac - 1];
 
 	while (av[i])
 	{
@@ -52,19 +55,8 @@ int	main(int ac, char **av)
 	std::cout << "===================================" << std::endl;
 	std::cout << std::endl;
 
-	// pmergeMe.displayTemp();
-
-	pmergeMe.sort();
-	
-	// pmergeMe.display();
-
-
-
-	// std::cout << std::endl;
-	// std::cout << "===================================" << std::endl;
-	// std::cout << std::endl;
-
-	// pmergeMe.displayResult();
+	pmergeMe.run();
+	pmergeMe.displayResult();
 
 	std::cout << std::endl;
 	std::cout << "===================================" << std::endl;

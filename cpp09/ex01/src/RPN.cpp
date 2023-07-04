@@ -95,7 +95,7 @@ long long	RPN::resolve( void )
 }
 
 
-void	RPN::checkSyntax(const int &countValues, const int &countOperators, const char &lastElement)
+void	RPN::checkSyntax(const int &countValues, const int &countOperators, const char &lastElement) const
 {
 	if (std::isdigit(lastElement))
 		exitMessage("[ERROR] Invalid syntax");
@@ -105,23 +105,23 @@ void	RPN::checkSyntax(const int &countValues, const int &countOperators, const c
 		exitMessage("[ERROR] To many values");
 }
 
-void	RPN::checkSyntax(const int &countValues, const int &countOperators)
+void	RPN::checkSyntax(const int &countValues, const int &countOperators) const
 {
 	if (countValues == 1 and countOperators == 1)
 		exitMessage("[ERROR] To many values");
 }
 
-bool	RPN::isValidChar(const std::string &VALID_SET, char c){
+bool	RPN::isValidChar(const std::string &VALID_SET, char c) const {
 	return (std::find(VALID_SET.begin(), VALID_SET.end(), c) != VALID_SET.end());
 }
 
-bool	RPN::isDigitUpper10(std::string &parameter, int i){
+bool	RPN::isDigitUpper10(std::string &parameter, int i) const {
 	return (std::isdigit(parameter[i]) and std::isdigit(parameter[i + 1]));
 }
 
 /*================================ Accessors =================================*/
 
-long long	RPN::getResult( void ){
+long long	RPN::getResult( void ) const {
 	return (_result);
 }
 

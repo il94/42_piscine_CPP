@@ -30,7 +30,7 @@ BitcoinExchange::BitcoinExchange( const std::string &src )
 	}
 }
 
-BitcoinExchange::BitcoinExchange( const BitcoinExchange &src ){
+BitcoinExchange::BitcoinExchange( const BitcoinExchange &src ) : std::map<std::string, float>(src) {
 	std::cout << "[BitcoinExchange] Copy constructor called." << std::endl;
 	*this = src;
 }

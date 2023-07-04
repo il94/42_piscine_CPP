@@ -3,9 +3,10 @@
 
 #include <iostream>
 #include <climits>
+#include <ctime>
+#include <algorithm>
 
 #include <string>
-#include <array>
 #include <list>
 #include <deque>
 
@@ -15,6 +16,8 @@
 #define GREEN "\033[32m"
 #define YELLOW "\033[33m"
 #define END "\033[0m"
+
+bool	operator<(const std::pair<int, int> &a, const std::pair<int, int> &b);
 
 class PmergeMe
 {
@@ -29,28 +32,76 @@ class PmergeMe
 	PmergeMe&	operator=(const PmergeMe &);
 
 	/* Methods */
-
-	void			push( int );
-	void			displayTemp( void );
-	void			display( void );
-	void			sort( void );
-	std::list<int>	sortList( std::list<int> );
-	void			displayResult( void );
+	void	push( int );
+	void	run( void );
+	void	displayResult( void );
+	
+	template <typename T, typename U>
+	void	insert(T *copy, U n)
+	{
+		for (typename T::reverse_iterator it = copy->rbegin(); it != copy->rend(); it++)
+		{
+			if (*it < n)
+			{
+				copy->insert(it.base(), n);
+				return ;
+			}
+		}
+		copy->insert(copy->begin(), n);
+	};
 
 	/* Accessors */
+	std::list<int>	getElements( void ) const;
+	std::list<int>	getList( void ) const;
+	std::deque<int>	getDeque( void ) const;
+	double			getTimeList( void ) const;
+	double			getTimeDeque( void ) const;
+
+	void	setElements( const std::list<int> & );
+	void	setList( const std::list<int> & );
+	void	setDeque( const std::deque<int> & );
+	void	setTimeList( const double & );
+	void	setTimeDeque( const double & );
 
 	private :
 
-	/* Attributes */
+	/* Methods */
+	void	sortList( void );
+	void	sortDeque( void );
 
+	void	mergeInsert( const std::list<std::pair<int, int> > & );
+	void	mergeInsert( const std::deque<std::pair<int, int> > & );
+
+	int		jacobSthal( int );
+
+	template <typename T, typename U>
+	T	splitToPair( U &toSplit )
+	{
+		T					pairs;
+		std::pair<int, int>	pair;
+
+		for (typename U::iterator it = toSplit.begin(); it != toSplit.end(); it++)
+		{
+			pair.first = *it;
+			it++;
+			pair.second = *it;
+
+			if (pair.first > pair.second)
+				std::swap(pair.first, pair.second);
+
+			insert(&pairs, pair);
+		}
+		return (pairs);
+	};
+
+	/* Attributes */
 	std::list<int>	_elements;
 
 	std::list<int>	_list;
 	std::deque<int>	_deque;
 
-	int				_timeList;
-	int				_timeDeque;
-
+	double			_timeList;
+	double			_timeDeque;
 };
 
 #endif

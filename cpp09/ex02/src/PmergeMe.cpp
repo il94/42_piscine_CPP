@@ -7,6 +7,7 @@ PmergeMe::PmergeMe(){
 }
 
 PmergeMe::PmergeMe(const PmergeMe &src){
+	*this = src;
 	std::cout << "[PmergeMe] Copy constructor called." << std::endl;
 }
 
@@ -39,181 +40,19 @@ void	PmergeMe::push(int src)
 	_deque.push_back(src);
 }
 
-void	PmergeMe::displayTemp( void )
+void	PmergeMe::run( void )
 {
-	std::cout << BLUE << "PMERGME ELEMENTS : " << std::endl;
+	time_t start, end;
 
-	for (std::list<int>::iterator it = _elements.begin(); it != _elements.end(); it++)
-	{
-		std::cout << *it << ' ';
-	}
-	std::cout << END << std::endl;
+	start = std::clock();
+	sortList();
+	end = std::clock();
+	_timeList = static_cast<double>(end - start) / CLOCKS_PER_SEC;
 
-	std::cout << std::endl;
-}
-
-void	PmergeMe::display( void )
-{
-	// std::cout << BLUE << "PMERGME ELEMENTS : " << std::endl;
-
-	// for (std::list<int>::iterator it = _elements.begin(); it != _elements.end(); it++)
-	// {
-	// 	std::cout << *it << ' ';
-	// }
-	// std::cout << END << std::endl;
-
-	// std::cout << std::endl;
-
-	std::cout << YELLOW << "PMERGME LIST : " << std::endl;
-
-	for (std::list<int>::iterator it = _list.begin(); it != _list.end(); it++)
-	{
-		std::cout << *it << ' ';
-	}
-	std::cout << END << std::endl;
-
-	std::cout << std::endl;
-
-	std::cout << PURPLE << "PMERGME DEQUE : " << std::endl;
-	
-	for (std::deque<int>::iterator it = _deque.begin(); it != _deque.end(); it++)
-	{
-		std::cout << *it << ' ';
-	}
-	std::cout << END << std::endl;
-	std::cout << std::endl;
-}
-
-void	PmergeMe::sort( void )
-{
-	std::cout << YELLOW;
-	_list = sortList(_list);
-	std::cout << END << std::endl;
-
-	// for (std::list<int>::iterator it = _list.begin(); it != _list.end(); it++)
-	// 	std::cout << GREEN << *it << ' ' << END;
-	// std::cout << std::endl;
-
-	// std::cout << PURPLE;
-	// sortDeque();
-	// std::cout << END << std::endl;
-}
-
-std::list<int>	PmergeMe::sortList( std::list<int> list )
-{
-	if (list.size() == 1)
-		return (list);
-
-	std::list<int>	result = list;
-
-	for (std::list<int>::iterator it = list.begin(); it != list.end(); it++)
-		std::cout << BLUE << *it << ' ' << END;
-	std::cout << std::endl;
-
-	bool	odd = false;
-	int		last;
-
-	if (result.size() % 2 != 0)
-		odd = true;
-	
-	if (odd)
-	{
-		last = result.back();
-		result.pop_back();
-	}
-	
-	std::list<std::pair<int, int> >	pairs;
-	std::pair<int, int>				pair;
-	
-	while (result.empty() == false)
-	{
-		pair.first = result.front();
-		result.pop_front();
-		pair.second = result.front();
-		result.pop_front();
-
-		// if (pair.first > pair.second)
-		// {
-		// 	int temp = pair.second;
-		// 	pair.second = pair.first;
-		// 	pair.first = temp;
-		// }
-		pairs.push_back(pair);
-	}
-
-	for (std::list<std::pair<int, int> >::iterator it = pairs.begin(); it != pairs.end(); it++)
-	{
-		std::cout << "[ " << it->first << " , " << it->second << " ] ";
-
-		result.push_back(std::max(it->first, it->second));
-	}
-	std::cout << std::endl;
-
-	for (std::list<int>::iterator it = result.begin(); it != result.end(); it++)
-		std::cout << PURPLE << *it << ' ' << END;
-	std::cout << std::endl;
-
-	if (odd)
-		std::cout << "LAST = " << last << std::endl;
-
-	std::cout << std::endl;
-
-	if (result.size() != 1)
-		result = sortList(result);
-
-	// if (odd)
-
-
-	for (std::list<std::pair<int, int> >::iterator it = pairs.begin(); it != pairs.end(); it++)
-		std::cout << YELLOW << "[ " << it->first << " , " << it->second << " ] " << END;
-	std::cout << std::endl;
-	for (std::list<int>::iterator it = result.begin(); it != result.end(); it++)
-		std::cout << GREEN << *it << ' ' << END;
-	std::cout << std::endl;
-
-
-
-	// if (result.size() == 1)
-	// {
-	// 	std::cout << YELLOW << "IF" << END << std::endl;
-
-		// for (std::list<int>::iterator it = result.begin(); it != result.end(); it++)
-		// 	std::cout << GREEN << *it << ' ' << END;
-		// std::cout << std::endl;
-	// 	for (std::list<std::pair<int, int> >::iterator it = pairs.begin(); it != pairs.end(); it++)
-	// 		std::cout << YELLOW << "[ " << it->first << " , " << it->second << " ] " << END;
-	// 	std::cout << std::endl;
-	// 	std::cout << std::endl;
-
-	// 	return (result);
-	// }
-	// else
-	// {
-	// 	result = sortList(result);
-
-	// 	for (std::list<int>::iterator it = result.begin(); it != result.end(); it++)
-	// 		std::cout << GREEN << *it << ' ' << END;
-	// 	std::cout << std::endl;
-	// 	for (std::list<std::pair<int, int> >::iterator it = pairs.begin(); it != pairs.end(); it++)
-	// 		std::cout << YELLOW << "[ " << it->first << " , " << it->second << " ] " << END;
-	// 	std::cout << std::endl;
-	// 	std::cout << std::endl;
-
-
-
-	// }
-
-
-	// for (std::list<std::pair<int, int> >::iterator it = pairs.begin(); it != pairs.end(); it++)
-	// {
-	// 	if (it->first >= )
-	// }
-
-
-
-
-	return (result);
-	
+	start = std::clock();
+	sortDeque();
+	end = std::clock();
+	_timeDeque = static_cast<double>(end - start) / CLOCKS_PER_SEC;
 }
 
 void	PmergeMe::displayResult( void )
@@ -232,24 +71,183 @@ void	PmergeMe::displayResult( void )
 
 	std::cout << std::endl;
 
-	std::cout << "Time to process a range of " << BLUE << _elements.size() << END << " elements with std::list : " << std::endl;
+	std::cout << "Time to process a range of " << BLUE << _elements.size() << END << " elements with std::list" << std::endl;
 
 	if (_timeList < _timeDeque)
-		std::cout << GREEN << '\t' << _timeList << END << std::endl;
+		std::cout << GREEN;
 	else if (_timeList > _timeDeque)
-		std::cout << RED << '\t' << _timeList << END << std::endl;
+		std::cout << RED;
 	else
-		std::cout << YELLOW << '\t' << _timeList << END << std::endl;
+		std::cout << YELLOW;
+	std::cout << '\t' << _timeList << END << " sec (CPU time)" << std::endl;
 	
 	std::cout << std::endl;
 
-	std::cout << "Time to process a range of " << BLUE << _elements.size() << END << " elements with std::deque : " << std::endl;
+	std::cout << "Time to process a range of " << BLUE << _elements.size() << END << " elements with std::deque" << std::endl;
 	if (_timeDeque < _timeList)
-		std::cout << GREEN << '\t' << _timeDeque << END << std::endl;
+		std::cout << GREEN;
 	else if (_timeDeque > _timeList)
-		std::cout << RED << '\t' << _timeDeque << END << std::endl;
+		std::cout << RED;
 	else
-		std::cout << YELLOW << '\t' << _timeDeque << END << std::endl;
+		std::cout << YELLOW;
+
+	std::cout << '\t' << _timeDeque << END << " sec (CPU time)" << std::endl;
+}
+
+void	PmergeMe::sortList( void )
+{
+	bool	odd = false;
+	int		last;
+
+	if (_list.size() % 2 != 0)
+	{
+		odd = true;
+		last = _list.back();
+		_list.pop_back();
+	}
+
+	std::list<std::pair<int, int> >	pairs;
+	pairs = splitToPair<std::list<std::pair<int, int> > >(_list);
+
+	_list.clear();
+
+	for (std::list<std::pair<int, int> >::iterator it = pairs.begin(); it != pairs.end(); it++)
+		_list.push_back(it->second);
+	if (odd)
+		pairs.push_back(std::pair<int, int> (last, 0));
+
+	mergeInsert(pairs);
+}
+
+void	PmergeMe::sortDeque( void )
+{
+	bool	odd = false;
+	int		last;
+
+	if (_deque.size() % 2 != 0)
+	{
+		odd = true;
+		last = _deque.back();
+		_deque.pop_back();
+	}
+
+	std::deque<std::pair<int, int> >	pairs;
+	pairs = splitToPair<std::deque<std::pair<int, int> > >(_deque);
+
+	_deque.clear();
+
+	for (std::deque<std::pair<int, int> >::iterator it = pairs.begin(); it != pairs.end(); it++)
+		_deque.push_back(it->second);
+	if (odd)
+		pairs.push_back(std::pair<int, int> (last, 0));
+
+	mergeInsert(pairs);
+}
+
+void	PmergeMe::mergeInsert( const std::list<std::pair<int, int> > &pairs )
+{
+	_list.push_front(pairs.front().first);
+
+	size_t	target = 0;
+	size_t	oldTarget = 0;
+	size_t	jacobTarget = 2;
+	size_t	i = 0;
+
+	std::list<std::pair<int, int> >::const_iterator it;
+
+	while (_list.size() != _elements.size())
+	{
+		if (target > oldTarget + 1)
+			target--;
+		else
+		{
+			oldTarget = jacobSthal(jacobTarget - 1);
+			target = jacobSthal(jacobTarget);
+			jacobTarget++;
+			while (target > pairs.size() - 1)
+				target--;
+		}
+		it = pairs.begin();
+		i = 0;
+		while (i < target)
+		{
+			i++;
+			it++;
+		}
+		insert(&_list, it->first);
+	}
+}
+
+void	PmergeMe::mergeInsert( const std::deque<std::pair<int, int> > &pairs )
+{
+	_deque.push_front(pairs[0].first);
+
+	size_t	target = 0;
+	size_t	oldTarget = 0;
+	size_t	jacobTarget = 2;
+
+	while (_deque.size() != _elements.size())
+	{
+		if (target > oldTarget + 1)
+			target--;
+		else
+		{
+			oldTarget = jacobSthal(jacobTarget - 1);
+			target = jacobSthal(jacobTarget);
+			jacobTarget++;
+			while (target > pairs.size() - 1)
+				target--;
+		}
+		insert(&_deque, pairs[target].first);
+	}
+}
+
+int		PmergeMe::jacobSthal( int n )
+{
+	if (n == 0 or n == 1)
+		return (n);
+	return (jacobSthal(n - 1) + 2 * jacobSthal(n - 2));
 }
 
 /*================================ Accessors =================================*/
+
+std::list<int>	PmergeMe::getElements( void ) const {
+	return (_elements);
+}
+
+std::list<int>	PmergeMe::getList( void ) const {
+	return (_list);
+}
+
+std::deque<int>	PmergeMe::getDeque( void ) const {
+	return (_deque);
+}
+
+double			PmergeMe::getTimeList( void ) const {
+	return (_timeList);
+}
+
+double			PmergeMe::getTimeDeque( void ) const {
+	return (_timeDeque);
+}
+
+
+void	PmergeMe::setElements(const std::list<int> &src) {
+	_elements = src;
+}
+
+void	PmergeMe::setList(const std::list<int> &src) {
+	_list = src;
+}
+
+void	PmergeMe::setDeque(const std::deque<int> &src) {
+	_deque = src;
+}
+
+void	PmergeMe::setTimeList(const double &src) {
+	_timeList = src;
+}
+
+void	PmergeMe::setTimeDeque(const double &src) {
+	_timeDeque = src;
+}

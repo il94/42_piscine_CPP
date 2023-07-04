@@ -32,19 +32,20 @@ class RPN
 	/* Methods */
 	long long	resolve( void );
 
-	void	checkSyntax(const int &countValues, const int &countOperators, const char &lastElement);
-	void	checkSyntax(const int &countValues, const int &countOperators);
-	bool	isValidChar(const std::string &VALID_SET, char c);
-	bool	isDigitUpper10(std::string &parameter, int i);
-
 	/* Accessors */
-	long long	getResult( void );
+	long long	getResult( void ) const;
 	void		setResult( const long long &src );
 
 	private :
 
 	/* Constructors */
 	RPN();
+
+	/* Methods */
+	void	checkSyntax(const int &countValues, const int &countOperators, const char &lastElement) const;
+	void	checkSyntax(const int &countValues, const int &countOperators) const;
+	bool	isValidChar(const std::string &VALID_SET, char c) const;
+	bool	isDigitUpper10(std::string &parameter, int i) const;
 
 	/* Attributes */
 	std::string			_equation;

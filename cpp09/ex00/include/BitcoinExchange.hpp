@@ -35,18 +35,8 @@ class BitcoinExchange : public std::map<std::string, float>
 	BitcoinExchange&	operator=( const BitcoinExchange & );
 
 	/* Methods */
-	
 	void	evaluate( void );
 	void	fill(const std::string &sourceFile);
-
-	void	printResult(const std::string &date, const std::string &btcCount);
-	void	printAdjustedResult(const std::string &date, const std::string &btcCount, const std::string &wrongDate);
-	void	printResultError(const std::string &src);
-
-	bool	isValidDate(const std::string &str);
-	bool	isValidValue(const std::string &str);
-
-	std::map<std::string, std::string>	splitDate(const std::string &str, char delimiter);
 
 	/* Accessors */
 	t_Mstr_Vstr	getToEvaluate( void ) const ;
@@ -56,6 +46,16 @@ class BitcoinExchange : public std::map<std::string, float>
 
 	/* Constructors */
 	BitcoinExchange();
+
+	/* Methods */
+	void	printResult(const std::string &date, const std::string &btcCount);
+	void	printAdjustedResult(const std::string &date, const std::string &btcCount, const std::string &wrongDate);
+	void	printResultError(const std::string &src);
+
+	bool	isValidDate(const std::string &str);
+	bool	isValidValue(const std::string &str);
+
+	std::map<std::string, std::string>	splitDate(const std::string &str, char delimiter);
 
 	/* Attributes */
 	t_Mstr_Vstr	_toEvaluate;
